@@ -85,78 +85,29 @@
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{Studies of uniformity of 50~$\mu$m low-gain avalanche detectors
-at the Fermilab test beam.}
+\title{Simulation of the time resolution of a 50~$\mu$m low-gain avalanche detector.}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
 %% \address[label1]{}
 %% \address[label2]{}
 
-\author[1]{A.~Apresyan\corref{cor}}\ead{apresyan@fnal.gov}
-\author[2]{S.~Xie}
-\author[2]{C.~Pena}
-\author[5,7]{R.~Arcidiacono}
-\author[5]{N.~Cartiglia}
-\author[8]{M.~Carulla}
-\author[1]{G.~Derylo}
-\author[5]{M.~Ferrero}
-\author[8]{D.~Flores}
-\author[4]{P.~Freeman}
-\author[4]{Z.~Galloway}
-\author[9]{A.~Ghassemi}
-\author[3]{H.~Al Ghoul}
-\author[1]{L.~Gray}
-\author[8]{S.~Hidalgo}
-\author[9]{S.~Kamada}
-\author[1]{S.~Los}
-\author[5]{M.~Mandurrino}
-\author[8]{A.~Merlos}
-\author[3]{N.~Minafra}
-\author[1]{A.~Ronzhin}
-\author[8]{G.~Pellegrini}
-\author[8]{D.~Quirion}
-\author[3]{C.~Royon}
-\author[4]{H.~Sadrozinski}
-\author[4]{A.~Seiden}
-\author[5]{V.~Sola}
-\author[2]{M.~Spiropulu}
-\author[5]{A.~Staiano}
-\author[1]{L.~Uplegger}
-\author[9]{K.~Yamamoto}
-\author[9]{K.~Yamamura}
+\author[1,2]{C.~Pena\corref{cor}}\ead{cmorgoth@fnal.gov}
+\author[1]{A.~Apresyan}
+\author[1]{S.~Xie}
+\author[3]{N.~Cartiglia}
+
 
 \address[1]{Fermi National Accelerator Laboratory, Batavia, IL, USA}
 \address[2]{California Institute of Technology, Pasadena, CA, USA}
-\address[3]{University of Kansas, KS, USA}
-\address[4]{SCIPP, University of California Santa Cruz, CA, USA}
-\address[5]{INFN, Torino, Italy}
-\address[6]{Universit\`a di Torino, Torino, Italy}
-\address[7]{Universit\`a del Piemonte Orientale, Italy}
-\address[8]{Centro Nacional de Microelectr\'{o}nica (IMB-CNM-CSIC), Barcelona, Spain}
-\address[9]{Hamamatsu Photonics (HPK), Hamamatsu, Japan}
+\address[3]{INFN, Torino, Italy}
 \cortext[cor]{Corresponding author}
 
 \begin{abstract}
 %% Text of abstract
-In this paper we report measurements of the uniformity of time resolution, signal
-amplitude, and charged particle detection efficiency across the sensor surface
-of low-gain avalanche detectors (LGAD). Comparisons of the performance of sensors
-with different doping concentrations and different active thicknesses are
-presented, as well as their temperature dependance and radiation tolerance up to
-$6\times 10^{14}$~n/cm$^2$. Results were obtained at the Fermilab test beam
-facility using 120 GeV proton beams, and a high precision pixel tracking
-detector. LGAD sensors manufactured by the Centro Nacional de Microelectr\'{o}nica (CNM) and
-Hamamatsu Photonics (HPK) were studied. The uniformity of the
-sensor response in pulse height before irradiation was found to have a
-2\% spread. The signal detection efficiency and timing resolution in the sensitive areas before irradiation
-were found to be 100\%  and 30-40~\si{ps}, respectively. A ``no-response'' area between pads was
-measured to be about 130~$\mu$m for CNM and 170$\mu$m for HPK sensors. After a
-neutron fluence of $6\times 10^{14}$~n/cm$^2$ the CNM sensor exhibits a large
-gain variation of up to a factor of $2.5$ when comparing metalized and non-metalized
-sensor areas. An irradiated CNM sensor achieved a time resolution of 30~ps for the
-metalized area and 40~ps for the non-metalized area, while 
-a HPK sensor irradiated to the same fluence achieved a 30~\si{ps} time resolution.
+In this paper we report simulation results on the time resolution of a 50~$\mu$m low-gain avalanche detector (LGAD). 
+The simulation includes: sensor fluctuations, front-end electronics, and quantization. 
+Comparisons on the performance for different front-end (FE) electonics bandwidths (BWs) are presented, as well as the dependance on singal-to-noise ratio (SNR). Two approaches to correct the time-walk effect are presented: time-over-therhold (ToT) and constant fraction discrimination (CFD). Aditionally, the time resolution is studied as function of the irradiation of the sensor. Simulated LGAD pulses before irradiation, and after neutron fluences of $5\times 10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$, are studied. The time resolution a 50~$\mu$m LGADs was found to be ~30~ps for FE electronics BWs larger than 350~MHz and SNRs larger than 30. The time resolution at a SNR of 30 for fluences of $5\times 10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$ were found to be~30~\si{ps} and~40~\si{ps}, respectively.
 \end{abstract}
 
 \begin{keyword}
