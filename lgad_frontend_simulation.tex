@@ -45,6 +45,8 @@
 \usepackage{siunitx}
 \usepackage{multirow}
 \usepackage{wasysym}
+\usepackage{tabularx}
+\usepackage{mathtools}
 %\usepackage[percent]{overpic}
 %\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 %\usepackage{cleveref}
@@ -96,6 +98,7 @@
 \author[1]{G.~Deptuch}
 \author[2]{S.~Xie}
 \author[1]{A.~Apresyan}
+\author[2]{L.~Narvaez}
 \author[1]{T.~Liu}
 \author[3]{N.~Cartiglia}
 
@@ -222,17 +225,42 @@ of the sensor to minimum ionizing particles (MIPs). We generated 3 sets of LGAD 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.75\textwidth]{figs/lgad_simulation_diagram.pdf}
-\caption{A schematic diagram of the simulation. Each simulation block is configurable and shown in green. The most relevant outputs
+\caption{A schematic diagram of the simulation. Each simulation configurable block is shown in green. The most relevant outputs
 of the simulation are shown in blue.}
 \label{fig:simulation_diagram}
 \end{figure}
 
 \subsection{LGAD pulse library and simulation}
 \label{sub_sec:lgad_pulse_library}
+We need to ask Nicolo to send us a paragrah for the Weightfield2 (WF2)
 
 \subsection{Fron-end Electronics simulation and noise injection}
 \label{sub_sec:fee_simulation_and_noise}
+The front-end simulation is implemented in c++ programing language. It combines analytical calculations when possible but
+it mostly relies numerical methods. We implement most calculations in the time domain, while the frequency domain is mostly used
+to cross-check noise and the FEE expected response.
 
+\subsubsection{front-end implementation}
+We use a second order low-pass filter which transfer function
+  and impulse response are given by equations~\ref{eq:filter_tf} and~\ref{eq:filter_ir}, respectively.
+
+
+ \begin{tabularx}{\textwidth}{XX}
+ \begin{equation}\label{eq:filter_tf}
+   H(S) = \frac{\frac{1}{\tau_{s}^{2}}}{(S+1/\tau_{s})^{2}}
+ \end{equation}
+     &
+ \begin{equation}\label{eq:filter_ir}
+     h(t) = \frac{t}{\tau_s^2}e^{-t/\tau_{s}}
+ \end{equation}
+ \end{tabularx}\par
+
+ The output pulse of the FEE is the convolution (in time domain) of the pulse coming from the LGAD library and the FEE impulse response.
+ The time base for the pulses and the convolution is 1~\si{ps} -- this is the sampling time that we use for the whole
+ signal simulation, noise is treated differently and cover in~\ref{sec:noise_simulation}.
+
+\subsubsection{noise injection}\label{sec:noise_simulation}
+blah blah blah
 \section{Timing Reconstruction and Analysis}
 \label{sec:timing_and_analysis}
 
