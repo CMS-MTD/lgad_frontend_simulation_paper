@@ -237,12 +237,14 @@ We need to ask Nicolo to send us a paragrah for the Weightfield2 (WF2)
 \subsection{Fron-end Electronics simulation and noise injection}
 \label{sub_sec:fee_simulation_and_noise}
 The front-end simulation is implemented in c++ programing language. It combines analytical calculations when possible but
-it mostly relies numerical methods. We implement most calculations in the time domain, while the frequency domain is mostly used
-to cross-check noise and the FEE expected response.
+it mostly relies on numerical methods. We implement most calculations in the time domain, while the frequency domain is mostly used
+to cross-check noise and the FEE expected response. Sections~\ref{sec:fee} and~\ref{sec:noise_simulation} detail the front-end and
+noise implementation in the simulation.
 
-\subsubsection{front-end implementation}
-We use a second order low-pass filter which transfer function
-  and impulse response are given by equations~\ref{eq:filter_tf} and~\ref{eq:filter_ir}, respectively.
+\subsubsection{front-end implementation}\label{sec:fee}
+The fron-end simulation is based on a single amplification stage. We focus on the BW of such amplifier rather than variations
+thereof. The fron-end chose is a second order low-pass filter which transfer function
+and impulse response are given by equations~\ref{eq:filter_tf} and~\ref{eq:filter_ir}, respectively.
 
 
  \begin{tabularx}{\textwidth}{XX}
@@ -255,9 +257,13 @@ We use a second order low-pass filter which transfer function
  \end{equation}
  \end{tabularx}\par
 
- The output pulse of the FEE is the convolution (in time domain) of the pulse coming from the LGAD library and the FEE impulse response.
+ The output pulse of the FEE is the convolution (in time domain) of the pulse from the LGAD library and the FEE impulse response
+ (see Eq.~\ref{eq:filter_ir}).
  The time base for the pulses and the convolution is 1~\si{ps} -- this is the sampling time that we use for the whole
- signal simulation, noise is treated differently and cover in~\ref{sec:noise_simulation}.
+ signal simulation, noise is treated differently and covered in Sec.~\ref{sec:noise_simulation}. As stated above we focus the study
+ on the BW of the FEE, to that end we scan the $\tau_{s}$ paremeter in Eq.~\ref{eq:filter_ir} in the following set:\{0.5, 1, 2, 4\}~\si{ns}, this parameter is hereafter referred to as
+ shaping time (ST). Figure~\ref{fig:ir_and_lgad} show the impulse response and the LGAD response of the FEE in the left and right panels,
+ respectively. 
 
 \subsubsection{noise injection}\label{sec:noise_simulation}
 blah blah blah
