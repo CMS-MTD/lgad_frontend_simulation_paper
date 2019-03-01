@@ -262,8 +262,20 @@ and impulse response are given by equations~\ref{eq:filter_tf} and~\ref{eq:filte
  The time base for the pulses and the convolution is 1~\si{ps} -- this is the sampling time that we use for the whole
  signal simulation, noise is treated differently and covered in Sec.~\ref{sec:noise_simulation}. As stated above we focus the study
  on the BW of the FEE, to that end we scan the $\tau_{s}$ paremeter in Eq.~\ref{eq:filter_ir} in the following set:\{0.5, 1, 2, 4\}~\si{ns}, this parameter is hereafter referred to as
- shaping time (ST). Figure~\ref{fig:ir_and_lgad} show the impulse response and the LGAD response of the FEE in the left and right panels,
- respectively. 
+ shaping time (ST). Figure~\ref{fig:ir_and_lgad} shows the impulse response and the LGAD response of the FEE in the left and right panels,
+ respectively.
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.48\textwidth]{figs/impulse_response.pdf} \hfill
+  \includegraphics[width=0.48\textwidth]{figs/lgad_all_shaping_time_noiseless.pdf}
+  \caption{(Left) The impulse response for the four shaping times studied: \{0.5, 1, 2, 4\}~\si{ns}.
+  (Right) The LGAD response for the four shaping times studied: \{0.5, 1, 2, 4\}~\si{ns}. All pulse have been nomalized
+  to achive a peak amplitude of 50~\si{mV}. Legends for the shaping times are shown in the plot.}
+  \label{fig:ir_and_lgad}
+\end{figure}
+
 
 \subsubsection{noise injection}\label{sec:noise_simulation}
 blah blah blah
