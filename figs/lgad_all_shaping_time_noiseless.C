@@ -2,7 +2,8 @@ void lgad_all_shaping_time_noiseless()
 {
 //=========Macro generated from canvas: c1/c1
 //=========  (Thu Feb 28 16:25:42 2019) by ROOT version 6.13/02
-   TCanvas *c1 = new TCanvas("c1", "c1",0,45,1505,949);
+  //TCanvas *c1 = new TCanvas("c1", "c1",0,45,1505,949);
+  TCanvas *c1 = new TCanvas("c1", "c1",1);
    c1->Range(11.17187,-6.750001,66.95313,60.75);
    c1->SetFillColor(0);
    c1->SetBorderMode(0);
