@@ -296,9 +296,22 @@ difference as measured by the CFD algorithm described in Sec.~\ref{sec:le_and_cf
 
 \subsubsection{noise injection}\label{sec:noise_simulation}
 Gaussian white noise is simulated by sampling the full time window (0 - 100~\si{ns}) in 10~\si{ps} intervals. At each
-sampled time we assign a random amplitude which is drawn from from a gaussian distribution with zero mean and with corresponding to the SNR
+sampled time we assign a random amplitude which is drawn from from a gaussian distribution with zero mean and width corresponding to the SNR
 under study. It is important to note that the width of the gausian parameter is not exactly the SNR and needs to be adjusted depending
-on the ST of the FEE under study.
+on the ST of the FEE. The left panel of Figure~\ref{fig:noise} shows the gaussian white noise before and after a 1~\si{ns} FEE.
+The expected behavior for the noise is obtained. The left panel of Figure~\ref{fig:noise} shows the output of the FEE block, with a 1~\si{ns} ST,
+ for a pre-radiation LGAD pulse when noise has been injected. The injected noise is such that the SNR is 30. SNR is defined ratio of the landau peak of the maximum amplitude
+ to the the r.m.s of the 100th sample over  an ensemble of 1000 pulses.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.48\textwidth]{figs/noise_vs_shaped_noise.pdf} \hfill
+  \includegraphics[width=0.48\textwidth]{figs/lgad_all_shaping_time_noiseless.pdf}
+  \caption{(Left) Comparison of impulse and LGAD reponses for the a shaping time (ST) of 1~\si{ns}.
+  (Right) LGAD response for the four shaping times studied: \{0.5, 1, 2, 4\}~\si{ns}. All pulses have been nomalized
+  to achive a peak amplitude of 50~\si{mV}. Legends for the shaping times are shown in the plots.}
+  \label{fig:noise}
+\end{figure}
 \section{Timing Reconstruction and Analysis}
 \label{sec:timing_and_analysis}
 
