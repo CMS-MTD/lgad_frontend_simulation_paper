@@ -314,7 +314,7 @@ The expected behavior for the noise is obtained. The left panel of Figure~\ref{f
 
 \section{Timing Reconstruction and Analysis}\label{sec:timing_and_analysis}
 The time reconstruction is base on a waveform analysis. We generate an ensamble of 1000 pulses sampled every 10 ps.
-Each pulse is interpolated using a sin(x)/x "kernel", using the interpolated pulse we assign a timestamp by finding when each pulse crosses
+Each pulse is interpolated using a the Whittaker–Shannon formula (sin(x)/x), using the interpolated pulse we assign a timestamp by finding when each pulse crosses
 a voltage threshold. The theshold can be a constant value (LE) or a constant fraction of the maximum amplitude of pulse (CFD), more details
 about the algorithms are given in Sec.~\ref{sec:le_and_cfd}. The time resolution is estimated by the width parameter of a gaussian fit
 to the timestamps obtain for a particular theshold. We apply a time time-walk correction based on the time-over-threshold of the pulse,
@@ -326,6 +326,15 @@ the LE and CFD threshold such that we find the one with the lowest jitter.
 \subsection{Leading edge and constant fraction discriminators}\label{sec:le_and_cfd}
 
 \subsection{Time-walk correction and time-over-threshold}\label{sec:tw_and_tot}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.48\textwidth]{figs/ShapingTime1p0_SNR30_55MicronGain15Prerad_FIXED_NOISE_FIXED_SNR_V2_converted_TimeResolutionVsThresholdToT.pdf} \hfill
+  \includegraphics[width=0.48\textwidth]{figs/ShapingTime1p0_SNR30_55MicronGain15Prerad_FIXED_NOISE_FIXED_SNR_V2_converted_TimeResolutionVsThresholdCFD.pdf}
+  \caption{(Left) Comparison of gaussian white noise before and after the FEE.
+  (Right) Example pulse at the output of the FEE block with a SNR of 30. Both figure use a shaping time (ST) of 1~\si{ns}. Legends for the shaping times are shown in the plots.}
+  \label{fig:noise}
+\end{figure}
 
 % \begin{figure}[!htbp]
 % \centering
