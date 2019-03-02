@@ -259,26 +259,46 @@ and impulse response are given by equations~\ref{eq:filter_tf} and~\ref{eq:filte
 
  The output pulse of the FEE is the convolution (in time domain) of the pulse from the LGAD library and the FEE impulse response
  (see Eq.~\ref{eq:filter_ir}).
- The time base for the pulses and the convolution is 1~\si{ps} -- this is the sampling time that we use for the whole
- signal simulation, noise is treated differently and covered in Sec.~\ref{sec:noise_simulation}. As stated above we focus the study
+ The time base for the pulses and the convolution is 10~\si{ps} -- this sampling time is used throughout the simulation. As stated above we focus the study
  on the BW of the FEE, to that end we scan the $\tau_{s}$ paremeter in Eq.~\ref{eq:filter_ir} in the following set:\{0.5, 1, 2, 4\}~\si{ns}, this parameter is hereafter referred to as
- shaping time (ST). Figure~\ref{fig:ir_and_lgad} shows the impulse response and the LGAD response of the FEE in the left and right panels,
- respectively.
+ shaping time (ST). Figure~\ref{fig:ir_and_lgad} (left) shows the comparison of the impulse and LGAD responses for a ST of 1~\si{ns} while
+ Figure~\ref{fig:ir_and_lgad} (right) shows the LGAD response for all STs studied. We obseve that the LGAD response is delayed with respect
+ to the impulse response,  and that pulse slew rate is decreased in the first nanosecond of the pulse. We also observe the expected
+ behavior when comparing the LGAD responses for the different STs, pulse risetimes scale with the ST and the decay time is dominated by
+ the ST.
 
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.48\textwidth]{figs/impulse_response.pdf} \hfill
+  \includegraphics[width=0.48\textwidth]{figs/impulse_vs_lgad_response_1ens_shaping.pdf} \hfill
   \includegraphics[width=0.48\textwidth]{figs/lgad_all_shaping_time_noiseless.pdf}
-  \caption{(Left) Impulse response for the four shaping times studied: \{0.5, 1, 2, 4\}~\si{ns}.
+  \caption{(Left) Comparison of impulse and LGAD reponses for the a shaping time (ST) of 1~\si{ns}.
   (Right) LGAD response for the four shaping times studied: \{0.5, 1, 2, 4\}~\si{ns}. All pulses have been nomalized
-  to achive a peak amplitude of 50~\si{mV}. Legends for the shaping times are shown in the plot.}
+  to achive a peak amplitude of 50~\si{mV}. Legends for the shaping times are shown in the plots.}
   \label{fig:ir_and_lgad}
 \end{figure}
 
+\begin{table}[!htb]
+\scriptsize
+\begin{center}
+  \begin{tabular}{ |c | c | c | c | c | }
+    \hline
+    Shaping time (ns) & 0.5         & 1.0         & 2.0         & 4.0 \\ \hline
+    Risetime (ns)     & $0.7\pm xx$ & $0.9\pm xx$ & $1.4\pm xx$ & $2.5\pm xx$ \\
+    \hline
+  \end{tabular}
+\caption{Measured risetime for all shaping times studied: \{0.5, 1, 2, 4\}~\si{ns}. Risetime is the $10\% - 90\%$ time
+difference as measured by the CFD algorithm described in Sec.~\ref{sec:le_and_cfd}.}
+\label{tab:sensors}
+\end{center}
+\end{table}
+
 
 \subsubsection{noise injection}\label{sec:noise_simulation}
-blah blah blah
+Gaussian white noise is simulated by sampling the full time window (0 - 100~\si{ns}) in 10~\si{ps} intervals. At each
+sampled time we assign a random amplitude which is drawn from from a gaussian distribution with zero mean and with corresponding to the SNR
+under study. It is important to note that the width of the gausian parameter is not exactly the SNR and needs to be adjusted depending
+on the ST of the FEE under study.
 \section{Timing Reconstruction and Analysis}
 \label{sec:timing_and_analysis}
 
