@@ -306,20 +306,26 @@ The expected behavior for the noise is obtained. The left panel of Figure~\ref{f
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.48\textwidth]{figs/noise_vs_shaped_noise.pdf} \hfill
-  \includegraphics[width=0.48\textwidth]{figs/lgad_all_shaping_time_noiseless.pdf}
-  \caption{(Left) Comparison of impulse and LGAD reponses for the a shaping time (ST) of 1~\si{ns}.
-  (Right) LGAD response for the four shaping times studied: \{0.5, 1, 2, 4\}~\si{ns}. All pulses have been nomalized
-  to achive a peak amplitude of 50~\si{mV}. Legends for the shaping times are shown in the plots.}
+  \includegraphics[width=0.48\textwidth]{figs/lgad_pre_rad_st_1ns_snr_30.pdf}
+  \caption{(Left) Comparison of gaussian white noise before and after the FEE.
+  (Right) Example pulse at the output of the FEE block with a SNR of 30. Both figure use a shaping time (ST) of 1~\si{ns}. Legends for the shaping times are shown in the plots.}
   \label{fig:noise}
 \end{figure}
-\section{Timing Reconstruction and Analysis}
-\label{sec:timing_and_analysis}
 
-\subsection{Leading edge and constant fraction discriminators}
-\label{sec:le_and_cfd}
+\section{Timing Reconstruction and Analysis}\label{sec:timing_and_analysis}
+The time reconstruction is base on a waveform analysis. We generate an ensamble of 1000 pulses sampled every 10 ps.
+Each pulse is interpolated using a sin(x)/x "kernel", using the interpolated pulse we assign a timestamp by finding when each pulse crosses
+a voltage threshold. The theshold can be a constant value (LE) or a constant fraction of the maximum amplitude of pulse (CFD), more details
+about the algorithms are given in Sec.~\ref{sec:le_and_cfd}. The time resolution is estimated by the width parameter of a gaussian fit
+to the timestamps obtain for a particular theshold. We apply a time time-walk correction based on the time-over-threshold of the pulse,
+we note that this correction has a large improvement on the time resolution measured using the LE algorithm while the CFD algorithm is mostly
+insentive to this correction. Details about this correction are covered in Sec.~\ref{sec:tw_and_tot}. The timestamps are measured with a
+20~\si{ps} binning while the time-over-thershold is measured with a 100~\si{ps} in order to simulate the effect of quantization. We scan
+the LE and CFD threshold such that we find the one with the lowest jitter.
 
-\subsection{Time-walk correction and time over threshold}
-\label{sec:tw_and_tot}
+\subsection{Leading edge and constant fraction discriminators}\label{sec:le_and_cfd}
+
+\subsection{Time-walk correction and time-over-threshold}\label{sec:tw_and_tot}
 
 % \begin{figure}[!htbp]
 % \centering
