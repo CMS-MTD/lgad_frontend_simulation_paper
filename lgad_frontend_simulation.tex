@@ -145,55 +145,29 @@ Silicon \sep Timing \sep LGAD
 %% main text
 \section{Introduction}
 
-% Future colliders, including the high luminosity upgrade of the Large Hadron
-% Collider (HL-LHC) at CERN, will operate with an order of magnitude higher
-% instantaneous luminosity compared to what has been achieved at the
-% large hadron collider (LHC) so far.
-% With the increased instantaneous luminosity, the rate of simultaneous
-% interactions per bunch crossing (pileup) is projected to reach an average of 140
-% to 200. Pileup increases the difficulties in separating
-% particles from the hard scattering interaction with those
-% produced in different pileup interactions. In particular, the ability to discriminate between
-% jets produced in the events of interests, especially those associated with vector
-% boson fusion processes, and jets produced by pileup interactions will be
-% degraded. Additionally, the efficiency to identify high $p_{\mathrm{T}}$ isolated electrons
-% and muons will be severely reduced due to the high density of pileup particles
-% in their vicinity. The missing transverse energy resolution will also deteriorate, and several
-% other physics objects performance metrics will suffer the
-% detrimental effects of pileup.
-%
-% One way to mitigate the pileup effects mentioned above, complementary to
-% precision tracking methods, is to perform a time of arrival measurement
-% associated with each particle. Such a measurement with a precision of about
-% 30-40~\si{ps}, will reduce the effective amount of pileup by a factor of 10,
-% given that the spread in collision time of the pileup interactions at HL-LHC is
-% foreseen to be approximately 200~\si{ps}. It has been previously shown that a
-% precision of better than $20$~\si{ps} can be achieved for electromagnetic
-% showers measured with silicon sampling
-% calorimeters~\cite{Apresyan201662,Apresyan2017_NSSMIC,AKCHURIN201731} using
-% traditional planar silicon detectors while precision of $30$~\si{ps} can be achived for minimum ionizing particles (MIPs) measured
-% with low-gain avalanches detectors (LGADs) ~\cite{Apresyan:2018oln, Cartiglia201783, PELLEGRINI201412}.
-
 LGADs are envisioned to be used in the CMS and ATLAS experiment upgrades for HL-LHC in order to overcome
 the event reconstruction challenges posed by the high rate of concurrent
-collisions per beam crossing. The implemented regions of pseudorapidity ($\eta$)
-are: $|\eta|>1.5$, and $2.4 < |\eta| < 4.2 $ for CMS and ATLAS, respectively. In
+collisions per beam crossing (pileup). The implemented regions of pseudorapidity ($\eta$)
+are: $1.5<\abs{\eta}<X.X$, and $2.4<\abs{\eta}<4.2$ for CMS and ATLAS, respectively. In
 order to achieve the desired timing precision across a large area of the
 detectors, the sensors will need to provide high uniformity of signal response
 and timing resolution. Beam test measurements have provided encouraging results towards achieving
 such detectors~\cite{Apresyan:2018oln}.
+%Si: We need to cite ATLAS testbeam results too right? Do they have it?
 
 In this paper, we report simulation results on the
 timing resolution of a 50~$\mu$m low-gain avalanche detector (LGAD) which includes
 the effects of the sensor fluctuations, front-end electronics (FEE), and quantization.
-Our results indicate that for FEE analog bandwidths (BWs) larger than 350~\si{MHz} (shaping times $<$ 1~\si{ns}) and signal-to-noise ratios
-(SNRs) larger than 30, time resolutions of ~$30-37$~\si{ps} and ~$34-47$~\si{ps}
-are obtained when using constand fraction (CF) and leading edge (LE) discrimintators, respectively. These results are
-compatible with previous measurements on LGAD timing resolutions carried out in laboratory and beam test
-conditions~\cite{Apresyan:2018oln, Cartiglia201783, PELLEGRINI201412}. We study the time resolution of four
-different FEE shaping times: $0.5$~\si{ps}, $1.0$~\si{ps}, $2.0$~\si{ps}, and $4.0$~\si{ps}; three SNR: 20, 30, 100; and three
-irradiation levels: pre-radiation, $5\times 10^{14}$~n/cm$^2$, and $1\times 10^{15}$~n/cm$^2$. For every point in this scan we
- evaluate the time resolution for LE and CFD.
+Our results indicate that for FEE analog bandwidths (BWs) larger than 350~\si{MHz},
+corresponding to shaping times less than 1~\si{ns}, and signal-to-noise ratios
+(SNR) larger than 30, time resolutions of 30--37~\si{ps} and 34--47~\si{ps}
+are obtained when using constant fraction (CF) and leading edge (LE) discrimintators, respectively. 
+These results are compatible with previous measurements on LGAD timing resolutions carried out under 
+laboratory and beam test conditions~\cite{Apresyan:2018oln, Cartiglia201783, PELLEGRINI201412}. 
+We study the time resolution of four different FEE shaping times: $0.5$~\si{ps}, $1.0$~\si{ps}, 
+$2.0$~\si{ps}, and $4.0$~\si{ps}; three SNR: 20, 30, 100; and three sensor irradiation 
+levels: pre-radiation, $5\times 10^{14}$~n/cm$^2$, and $1\times 10^{15}$~n/cm$^2$. 
+For every point in this scan we evaluate the time resolution for LE and CFD.
 
 The paper is organized as follows: the simulation is described in
 Sec.~\ref{sec:simulation}; algorithms used in the timing
@@ -207,22 +181,23 @@ Sec.~\ref{sec:conclusion}.
 %We performed the test-beam measurements at the Fermilab Test-beam
 %Facility%
 
-The simulation framework is based on c++ programing language. The LGAD pulses are obtained
-from Weightfield2 (WF2), a 2-dimensional silicon simulator~\cite{Sadrozinski:2017qpv}. WF2 provides sets of 1000 LGAD pulses which models the response
-of the sensor to minimum ionizing particles (MIPs). We generated 3 sets of LGAD pulses for a 50~$\mu$m LGAD:
- pre-irradiation, and after neutron fluences of $5\times 10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$. The simulation framework
- takes the LGAD pulses (from WF2) and adds gaussian white noise (hereafter white noise). At this point the LGAD pulses with the added white noise
- are fed into the simulation of the FEE (see Fig.~\ref{fig:simulation_diagram}). The output of the FEE simulation is the convolution of the
- impulse response function and the input signal at the FEE. We consider four shaping constants for the impulse response
- of the FEE: 0.5, 1.0, 2.0, and 4.0~\si{ns} (the FEE simulation is described
-  in Sec.~\ref{sub_sec:fee_simulation_and_noise}). At the output of the FEE block we have a simulated LGAD pulse which includes the effects
- of sensor fluctuations, shaping of the FEE, and noise. A waveform analysis is performed
-  with the pulses obtained at the output of the FEE block. We assign timestamps to each pulse by using algorithms that emulate
-  an ideal LE and CF discriminators. For each threhold we obtain a LE and CF
-  timestamp as well as the corresponding time-over-theshold (ToT) of the pulse.
-  The SNR is defined as the ratio of the most probable value (MPV) of the amplitude distribution to the
-  width of the amplitude distribution at a fixed sample (where only noise is present). We study 3 SNR scenarios: 20, 30, and 100.
-  A schematic diagram of the simulation is shown in Fig.~\ref{fig:simulation_diagram}.
+%The simulation framework is based on c++ programing language.  [Si: I don't think we need this right? also there's greg's stuff which is mathematica]
+Unprocessed signal pulses from the LGAD sensors are obtained from Weightfield2 (WF2), a 2-dimensional 
+silicon simulator~\cite{Sadrozinski:2017qpv}. WF2 was used to simulate sets of 1000 signal pulses modeling the 
+response of minimum-ionizing particles (MIP) traversing the LGAD sensor. Three sets of such signal pulses were
+generated for a 50~$\mu$m LGAD sensor at different levels of sensor irradiation: pre-irradiation, and after 
+neutron fluences of $5\times 10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$. 
+Gaussian white noise are added to these unprocessed signals, and the combined waveform is fed into 
+the simulation of the FEE, illustrated in Fig.~\ref{fig:simulation_diagram} and described in further detail in
+Sec.~\ref{sub_sec:fee_simulation_and_noise}. The output of the FEE simulation is the convolution of the
+impulse response function and the input signal at the FEE. We consider four shaping constants for the impulse response
+of the FEE: 0.5, 1.0, 2.0, and 4.0~\si{ns}. At the output of the FEE block, we obtain simulated processed LGAD pulses,
+which include the effects of sensor fluctuations, the shaping of the FEE, and noise. A waveform analysis is performed
+with the pulses obtained at the output of the FEE block. We assign timestamps to each pulse by using algorithms that emulate
+ideal LE and CF discriminators. For each threshold we obtain an LE and CF timestamp as well as the corresponding 
+time-over-theshold (ToT) of the pulse. The SNR is defined as the ratio of the most probable value (MPV) of the 
+amplitude distribution to the width of the amplitude distribution at a fixed sample of noise-only waveforms. 
+We study three SNR scenarios: 20, 30, and 100. A schematic diagram of the simulation is shown in Fig.~\ref{fig:simulation_diagram}.
 
 \begin{figure}[htbp]
 \centering
@@ -236,18 +211,17 @@ of the simulation are shown in blue.}
 %\label{sub_sec:lgad_pulse_library}
 %e need to ask Nicolo to send us a paragrah for the Weightfield2 (WF2)
 
-\subsection{Fron-end electronics and noise injection}
+\subsection{Front-end electronics and noise injection}
 \label{sub_sec:fee_simulation_and_noise}
-The front-end simulation is implemented in c++ programing language. It combines analytical calculations when possible but
-it mostly relies on numerical methods. We implement most calculations in the time domain, while the frequency domain is mostly used
-to cross-check noise and the FEE expected responses. Sections~\ref{sec:fee} and~\ref{sec:noise_simulation} detail the front-end and
-noise implementation in the simulation.
+The front-end simulation is implemented in c++ programing language. It combines analytical calculations when possible and 
+numerical methods. We implement most of the calculations in the time domain, while the frequency domain is mostly used
+to cross-check noise and the expected FEE response. Sections~\ref{sec:fee} and~\ref{sec:noise_simulation} describe
+the details of the implementation of the front-end and noise simulation.
 
-\subsubsection{front-end implementation}\label{sec:fee}
-The fron-end simulation is based on a single amplification stage. We focus on the BW of such amplifier rather than variations
-thereof. The FEE is a second order low-pass filter which transfer function
-and impulse response are given by equations~\ref{eq:filter_tf} and~\ref{eq:filter_ir}, respectively.
-
+\subsubsection{Front-end simulation}\label{sec:fee}
+The front-end simulation is based on a single amplification stage. We focus on the BW of such an amplifier rather than variations
+thereof. The FEE is a second order low-pass filter with transfer function
+and impulse response given by equations~\ref{eq:filter_tf} and~\ref{eq:filter_ir}, respectively.
 
  \begin{tabularx}{\textwidth}{XX}
  \begin{equation}\label{eq:filter_tf}
@@ -259,15 +233,16 @@ and impulse response are given by equations~\ref{eq:filter_tf} and~\ref{eq:filte
  \end{equation}
  \end{tabularx}\par
 
- The output pulse of the FEE is the convolution (in time domain) of the pulse from the LGAD library and the FEE impulse response
- (see Eq.~\ref{eq:filter_ir}).
- The time base for the pulses and the convolution is 10~\si{ps} -- this sampling time is used throughout the simulation. As stated above we focus the study
- on the BW of the FEE, to that end we scan the $\tau_{s}$ paremeter in Eq.~\ref{eq:filter_ir} in the following set:\{0.5, 1, 2, 4\}~\si{ns}, this parameter is hereafter referred to as
- shaping time (ST). Figure~\ref{fig:ir_and_lgad} (left) shows the comparison of the impulse and LGAD responses for a ST of 1~\si{ns} while
- Figure~\ref{fig:ir_and_lgad} (right) shows the LGAD response for all STs studied. We obseve that the LGAD response is delayed with respect
- to the impulse response,  and that pulse slew rate is decreased in the first nanosecond of the pulse. We also observe the expected
- behavior when comparing the LGAD responses for the different STs, pulse risetimes scale with the ST and the decay time is dominated by
- the ST. The measured 10 - 90\% risetimes are shown in Tab.~\ref{tab:risetime}.
+The output pulse of the FEE is the convolution (in time domain) of the unprocessed LGAD signal pulse from WF2 and the FEE impulse response
+function, given in Eq.~\ref{eq:filter_ir}. The time base for the pulses and the convolution is 10~\si{ps}, and we use this sampling time 
+throughout the simulation. As stated above we focus the study on the BW of the FEE and to that end we scan the $\tau_{s}$ paremeter 
+in Eq.~\ref{eq:filter_ir} in the following set:\{0.5, 1, 2, 4\}~\si{ns}. This parameter is hereafter referred to as
+shaping time (ST). Figure~\ref{fig:ir_and_lgad} (left) shows the comparison of the impulse and LGAD responses for a ST of 1~\si{ns} while
+Figure~\ref{fig:ir_and_lgad} (right) shows the LGAD response for all STs studied. We observe that the LGAD response is delayed with respect
+to the impulse response,  and that pulse slew rate is decreased in the first nanosecond of the pulse. As expected, we also observe 
+that the pulse risetime scale up with the ST and that the decay time is dominated by the ST. 
+The measured risetimes (10\% to 90\%) are shown in Tab.~\ref{tab:risetime}.
+%[Si: what does it mean that decay time is ``dominated'' by ST? Dont' understand that sentence]
 
 
 \begin{figure}[htbp]
@@ -296,7 +271,7 @@ difference as measured by the CFD algorithm described in Sec.~\ref{sec:le_and_cf
 \end{table}
 
 
-\subsubsection{noise injection}\label{sec:noise_simulation}
+\subsubsection{Noise injection}\label{sec:noise_simulation}
 Gaussian white noise is simulated by sampling the full time window (0 - 100~\si{ns}) in 10~\si{ps} intervals. Each
 sampled time is assign a random amplitude which is drawn from from a gaussian distribution with zero mean and width corresponding to the SNR
 under study. It is important to note that the width of the gausian parameter is not exactly the SNR and needs to be adjusted depending
