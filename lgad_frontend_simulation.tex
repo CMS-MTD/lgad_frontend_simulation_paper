@@ -198,12 +198,16 @@ the simulation of the FEE, illustrated in Fig.~\ref{fig:simulation_diagram} and 
 Sec.~\ref{sub_sec:fee_simulation_and_noise}. The output of the FEE simulation is the convolution of the
 impulse response function and the input signal at the FEE. We consider four shaping constants for the impulse response
 of the FEE: 0.5, 1.0, 2.0, and 4.0~\si{ns}. At the output of the FEE block, we obtain simulated processed LGAD pulses,
-which include the effects of sensor fluctuations, the shaping of the FEE, and noise. A waveform analysis is performed
-with the pulses obtained at the output of the FEE block. We assign timestamps to each pulse by using algorithms that emulate
+which include the effects of sensor fluctuations, the shaping of the FEE, and noise.
+The resulting processed pulses are scaled such that the landau-peak for each simulated condition is 50~\si{mV},
+this choice does not affect the results and it is made such that the analysis downstream is invariant.
+A waveform analysis is performed with the pulses obtained at the output of the FEE block.
+We assign timestamps to each pulse by using algorithms that emulate
 ideal LE and CF discriminators. For each threshold we obtain an LE and CF timestamp as well as the corresponding
 time-over-theshold (ToT) of the pulse. The SNR is defined as the ratio of the most probable value (MPV) of the
 amplitude distribution to the width of the amplitude distribution at a fixed sample of noise-only waveforms.
-We study three SNR scenarios: 20, 30, and 100. A schematic diagram of the simulation is shown in Fig.~\ref{fig:simulation_diagram}.
+We study three SNR scenarios: 20, 30, and 100.
+A schematic diagram of the simulation is shown in Fig.~\ref{fig:simulation_diagram}.
  %This simulation implements a more realistic version of a CF discriminator
 %based on signal delays.
 
@@ -277,10 +281,11 @@ The measured risetimes (10\% to 90\%) are shown in Tab.~\ref{tab:risetime}.
     %\multicolumn{1}{c}{}& \multicolumn{4}{c}{Risetime (10-90\%) (ps)} \\
     %\multicolumn{1}{c}{}& \multicolumn{3}{c}{$\mathrm{(RC)}^{2}$ Constant Fraction}\\ \hline
     ST (ns) & 0.5  & 1.0 & 2.0 & 4.0 \\\hline
-    Risetime (ns) & $0.7\pm xx$ & $0.9\pm xx$ & $1.4\pm xx$ & $2.5\pm xx$ \\
+    Risetime (ns) & $0.67\pm 0.02$ & $0.86\pm 0.02$ & $1.36\pm 0.02$ & $2.48\pm 0.02$ \\
     \end{tabular}
     \caption{Measured risetime for all shaping times studied: \{0.5, 1, 2, 4\}~\si{ns}. Risetime is the $10\% - 90\%$ time
-    difference as measured by the CFD algorithm described in Sec.~\ref{sec:le_and_cfd}.}
+    difference as measured by the CFD algorithm described in Sec.~\ref{sec:le_and_cfd}. The uncertainty is the rms of the
+    risetime distribution.}
   \end{center}
  \end{table}
 
@@ -338,10 +343,10 @@ of the threshold required for a pre-irradiated LGAD sensor with a ST of 1~\si{ns
 We note that the effect of the time-walk correction is large for LE and almost negligible for CF.
 Fig.~\ref{fig:time_res} shows a typical $t_{0}$ distribution, using the LE and CF algorithms, for the pre-irradiated
 LGAD sensor after the ToT correction has been applied. The time resolution ($\sigma_{t}$) is measured to be $37.3 \pm 1.4 $
-and $33.0 \pm 1.4$ for the LE and CF, respectively. Additionally, we study the impact of a more \textit{realistic} CFD implementations:
+and $33.0 \pm 1.4$ for the LE and CF, respectively. Additionally, we study more \textit{realistic} CFD implementations:
 {\color{red}split-and-delay as well as a second order RC filter (Greg, please check naming)} (see Sec.~\ref{sed:cfd_realistic}).
  We observe that \textit{ideal} and split-and delay CFD implementations yield equivalent results within uncertainties.
- The second order RC filter shows a degradation on performance with respect to the split-and delay implementation.
+ The second order RC filter shows a degradation on performance with respect to the split-and-delay implementation.
 
 \subsubsection{constant fraction discriminator implementations}\label{sed:cfd_realistic}
 {\color{red}GREG: PLEASE ADD TEXT HERE, I called the two implementations split-and-delay and second order RC previousluy in the text (also in red)}.
@@ -351,8 +356,9 @@ and $33.0 \pm 1.4$ for the LE and CF, respectively. Additionally, we study the i
     \centering
     \includegraphics[width=0.48\textwidth]{figs/ShapingTime1p0_SNR30_55MicronGain15Prerad_FIXED_NOISE_FIXED_SNR_V2_converted_TimeResolutionVsThresholdToT.pdf} \hfill
     \includegraphics[width=0.48\textwidth]{figs/ShapingTime1p0_SNR30_55MicronGain15Prerad_FIXED_NOISE_FIXED_SNR_V2_converted_TimeResolutionVsThresholdCFD.pdf}
-    \caption{(Left) Comparison of gaussian white noise before and after the FEE.
-    (Right) Example pulse at the output of the FEE block with a SNR of 30. Both figure use a shaping time (ST) of 1~\si{ns}. Legends for the shaping times are shown in the plots.}
+    \caption{(Left) LE time resolution as a function of threshold.
+    (Right) CF time resolution as a function of threshold.
+    Both figure use pre-irradiated LGAD sensor with a ST of 1 ns and a SNR of 30.}
     \label{fig:time_resolution_scan}
   \end{figure}
 
@@ -369,7 +375,7 @@ and $33.0 \pm 1.4$ for the LE and CF, respectively. Additionally, we study the i
 
 
 \subsection{Time-walk correction and time-over-threshold}\label{sec:tw_and_tot}
-A time-walk correction is applied in order to correct the timestamp drift when dealing with pulses of varying amplitudes.
+A time-walk correction is applied in order to correct the timestamp drift of pulses with varying amplitudes.
 The correction is based on the measured time-over-theshold: $\mathrm{ToT} = t_{1} - t_{0}$. As expected, we observe that the ToT correction
 is large for the LE case and negligible for CF (see Fig.~\ref{fig:time_resolution_scan}).
 Figure~\ref{fig:ToT} (left) shows a typical two dimensional map of $t_{0}$ and ToT for the
@@ -450,7 +456,7 @@ studied for a 2~\si{ns} ST. We observe a 50~\si{ps} degradation for a SNR of 20 
      \multicolumn{1}{c}{}& \multicolumn{3}{c}{Time Resolution (ps)} \\
      \multicolumn{1}{c}{}& \multicolumn{3}{c}{$\mathrm{(RC)}^{2}$ Constant Fraction}\\ \hline
      ST (ns) & SNR = 20      & SNR = 30      & SNR = 100 \\
-     2.0 & $46.0 \pm xx$  & $xx \pm xx$  & $xx \pm xx$ \\
+     2.0 & $68.0 \pm xx$  & $xx \pm xx$  & $xx \pm xx$ \\
      \end{tabular}
      \caption{50~$\mu$m pre-radiation LGAD sensor using a second order RC implementation of a CFD.
      Summary of best time resolution obtained using a ST of 2\si{ns} for SNRs of 20, 30, and 100.}
