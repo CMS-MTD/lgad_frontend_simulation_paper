@@ -145,7 +145,7 @@ Silicon \sep Timing \sep LGAD
 %% main text
 \section{Introduction}
 
-LGADs are envisioned to be used in the CMS and ATLAS experiment upgrades for HL-LHC in order to overcome
+Low-gain avalanche diodes (LGAD) are envisioned to be used in the CMS and ATLAS experiment upgrades for HL-LHC in order to overcome
 the event reconstruction challenges posed by the high rate of concurrent
 collisions per beam crossing (pileup). The implemented regions of pseudorapidity ($\eta$)
 are: $1.6< |\eta| <2.9$, and $2.4< |\eta|<4.2$ for CMS and ATLAS, respectively.
@@ -502,15 +502,15 @@ of ~31~\si{ps} and ~37~\si{ps} are obtained for $5\times 10^{14}$~n/cm$^2$ and $
 
 \section{Conclusion}\label{sec:conclusion}
 
-We study the time resolution of a 50~$\mu$m LGAD sensor using a simulation framework that includes the
+We study the time resolution of a 50~$\mu$m Low-gain avalanche diode (LGAD) sensor using a simulation framework that includes the
 modeling of the raw unprocessed LGAD signal pulse, the front-end electronics, and the quantization.
-We focus on the shaping time and signal-to-noise ratio of the front-end electronics and its interplay
+We focus on the shaping time (ST) and signal-to-noise ratio (SNR) of the front-end electronics and its interplay
 with the irradiation level of the sensor. We reproduce the known LGAD jitter of ~25~\si{ps}
 for fast STs and large SNRs. We observe a clear degradation of the time resolution with SNR and slower STs. The best results are
-obtained using a ST of 0.5~\si{ns} and using CF discriminator, and similar results are obtained with a ST of 1.0~\si{ns}. For a SNR of 30
+obtained using a ST of 0.5~\si{ns} and using constant fraction (CF) discriminator, and similar results are obtained with a ST of 1.0~\si{ns}. For a SNR of 30
 and for STs between 0.5-1.0~\si{ns} we obtain time resolutions between ~30 - 37~\si{ps} for the 3 irradiations considered. The
 reduction in gain with irradiation could bring the SNR for the most irradiated LGAD ($1\times 10^{15}$~n/cm$^2$) to 20 and thus
-worsen the time resolution to ~42 - 47~\si{ps}. We note a clear gain in performance of CF over LE discriminators, particularly at
+worsen the time resolution to ~42 - 47~\si{ps}. We note a clear gain in performance of CF over leading edge (LE) discriminators, particularly at
 low SNR and the largest irradiation level. For an ST of 1.0~\si{ns} at SNR = 30, the performance improvement of CF over LE
 is ~26\si{ps} for the pre-irradiated sensor and ~37\si{ps} for the irradiated sensor with neutron fluence of
 $1\times 10^{15}$~n/cm$^2$. A performance degradation is observed when using a {\color{red}second order RC} implementation of the CFD,
