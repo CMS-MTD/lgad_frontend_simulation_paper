@@ -9,7 +9,7 @@ void noise_vs_shaped_noise()
    c1->SetBorderSize(2);
    c1->SetFrameBorderMode(0);
    c1->SetFrameBorderMode(0);
-   
+
    TH2F *htemp__1 = new TH2F("htemp__1","100*shapednoise:time",40,0,105,40,-20.92681,26);
    htemp__1->SetDirectory(0);
    htemp__1->SetStats(0);
@@ -37,7 +37,7 @@ void noise_vs_shaped_noise()
    htemp__1->GetZaxis()->SetTitleSize(0.035);
    htemp__1->GetZaxis()->SetTitleFont(42);
    htemp__1->Draw("");
-   
+
    TPaveText *pt = new TPaveText(0.3087679,0.9368947,0.6912321,0.995,"blNDC");
    pt->SetName("title");
    pt->SetBorderSize(0);
@@ -45,7 +45,7 @@ void noise_vs_shaped_noise()
    pt->SetFillStyle(0);
    pt->SetTextFont(42);
    pt->Draw();
-   
+
    Double_t Graph0_fx1[10000] = {
    0,
    0.01,
@@ -20054,7 +20054,7 @@ void noise_vs_shaped_noise()
 
    ci = TColor::GetColor("#000099");
    graph->SetLineColor(ci);
-   
+
    TH1F *Graph_Graph01 = new TH1F("Graph_Graph01","Graph",10000,0,109.989);
    Graph_Graph01->SetMinimum(-25.29887);
    Graph_Graph01->SetMaximum(27.16585);
@@ -20077,9 +20077,10 @@ void noise_vs_shaped_noise()
    Graph_Graph01->GetZaxis()->SetTitleSize(0.035);
    Graph_Graph01->GetZaxis()->SetTitleFont(42);
    graph->SetHistogram(Graph_Graph01);
-   
+
+   graph->GetYaxis()->SetRangeUser(-30,30);
    graph->Draw("p");
-   
+
    Double_t Graph1_fx2[10000] = {
    0,
    0.01,
@@ -40090,7 +40091,7 @@ void noise_vs_shaped_noise()
    graph->SetLineColor(ci);
    graph->SetMarkerStyle(20);
    graph->SetMarkerSize(0.2);
-   
+
    TH1F *Graph_Graph12 = new TH1F("Graph_Graph12","Graph",10000,0,109.989);
    Graph_Graph12->SetMinimum(-8.267665);
    Graph_Graph12->SetMaximum(9.046125);
@@ -40113,9 +40114,9 @@ void noise_vs_shaped_noise()
    Graph_Graph12->GetZaxis()->SetTitleSize(0.035);
    Graph_Graph12->GetZaxis()->SetTitleFont(42);
    graph->SetHistogram(Graph_Graph12);
-   
+
    graph->Draw("p");
-   
+
    Double_t Graph2_fx3[10000] = {
    0,
    0.01,
@@ -60127,7 +60128,7 @@ void noise_vs_shaped_noise()
    graph->SetMarkerColor(4);
    graph->SetMarkerStyle(20);
    graph->SetMarkerSize(0.2);
-   
+
    TH1F *Graph_Graph23 = new TH1F("Graph_Graph23","Graph",10000,0,109.989);
    Graph_Graph23->SetMinimum(-25.29887);
    Graph_Graph23->SetMaximum(27.16585);
@@ -60150,8 +60151,27 @@ void noise_vs_shaped_noise()
    Graph_Graph23->GetZaxis()->SetTitleSize(0.035);
    Graph_Graph23->GetZaxis()->SetTitleFont(42);
    graph->SetHistogram(Graph_Graph23);
-   
+
+   graph->GetYaxis()->SetRangeUser(-30,30);
    graph->Draw("p");
+   TLegend* leg = new TLegend( 0.6, 0.7, 0.78, 0.89, NULL, "brNDC" );
+  leg->SetBorderSize(0);
+  leg->SetLineColor(1);
+  leg->SetLineStyle(1);
+  leg->SetLineWidth(1);
+  leg->SetFillColor(0);
+  leg->SetFillStyle(1001);
+  leg->SetTextSize(0.04);
+  Graph_Graph01->SetMarkerColor(kBlack);
+  Graph_Graph01->SetLineColor(kBlack);
+  Graph_Graph01->SetLineWidth(2);
+
+  Graph_Graph12->SetMarkerColor(kBlue);
+  Graph_Graph12->SetLineColor(kBlue);
+  Graph_Graph12->SetLineWidth(2);
+  leg->AddEntry(Graph_Graph01, " Before FEE", "l" );
+  leg->AddEntry(Graph_Graph12, " After FEE", "l" );
+   leg->Draw();
    c1->Modified();
    c1->cd();
    c1->SetSelected(c1);

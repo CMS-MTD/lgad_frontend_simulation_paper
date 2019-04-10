@@ -9,7 +9,7 @@ void impulse_vs_lgad_response_1ns_shaping()
    c1->SetBorderSize(2);
    c1->SetFrameBorderMode(0);
    c1->SetFrameBorderMode(0);
-   
+
    TH2F *htemp__1 = new TH2F("htemp__1","2*68.027211*0.99900100*channel:time {i_evt==0}",40,0,105,40,0,54);
    htemp__1->SetDirectory(0);
    htemp__1->SetStats(0);
@@ -37,7 +37,7 @@ void impulse_vs_lgad_response_1ns_shaping()
    htemp__1->GetZaxis()->SetTitleSize(0.035);
    htemp__1->GetZaxis()->SetTitleFont(42);
    htemp__1->Draw("");
-   
+
    TPaveText *pt = new TPaveText(0.15,0.9368947,0.85,0.995,"blNDC");
    pt->SetName("title");
    pt->SetBorderSize(0);
@@ -45,7 +45,7 @@ void impulse_vs_lgad_response_1ns_shaping()
    pt->SetFillStyle(0);
    pt->SetTextFont(42);
    pt->Draw();
-   
+
    Double_t Graph0_fx1[10000] = {
    0,
    0.01,
@@ -20057,7 +20057,7 @@ void impulse_vs_lgad_response_1ns_shaping()
    graph->SetMarkerColor(4);
    graph->SetMarkerStyle(20);
    graph->SetMarkerSize(0.2);
-   
+
    TH1F *Graph_Graph01 = new TH1F("Graph_Graph01","Graph",10000,0,109.989);
    Graph_Graph01->SetMinimum(0);
    Graph_Graph01->SetMaximum(55.00179);
@@ -20080,9 +20080,9 @@ void impulse_vs_lgad_response_1ns_shaping()
    Graph_Graph01->GetZaxis()->SetTitleSize(0.035);
    Graph_Graph01->GetZaxis()->SetTitleFont(42);
    graph->SetHistogram(Graph_Graph01);
-   
+
    graph->Draw("p");
-   
+
    Double_t Graph1_fx2[10000] = {
    -20,
    -19.99,
@@ -40094,7 +40094,7 @@ void impulse_vs_lgad_response_1ns_shaping()
    graph->SetMarkerColor(2);
    graph->SetMarkerStyle(20);
    graph->SetMarkerSize(0.2);
-   
+
    TH1F *Graph_Graph12 = new TH1F("Graph_Graph12","Graph",10000,-29.999,89.989);
    Graph_Graph12->SetMinimum(0);
    Graph_Graph12->SetMaximum(54.98315);
@@ -40117,9 +40117,29 @@ void impulse_vs_lgad_response_1ns_shaping()
    Graph_Graph12->GetZaxis()->SetTitleSize(0.035);
    Graph_Graph12->GetZaxis()->SetTitleFont(42);
    graph->SetHistogram(Graph_Graph12);
-   
+
+
    graph->Draw("p");
+   TLegend* leg = new TLegend( 0.6, 0.7, 0.78, 0.89, NULL, "brNDC" );
+  leg->SetBorderSize(0);
+  leg->SetLineColor(1);
+  leg->SetLineStyle(1);
+  leg->SetLineWidth(1);
+  leg->SetFillColor(0);
+  leg->SetFillStyle(1001);
+  leg->SetTextSize(0.04);
+  Graph_Graph01->SetMarkerColor(kBlue);
+  Graph_Graph01->SetLineColor(kBlue);
+  Graph_Graph01->SetLineWidth(2);
+
+  Graph_Graph12->SetMarkerColor(kRed);
+  Graph_Graph12->SetLineColor(kRed);
+  Graph_Graph12->SetLineWidth(2);
+  leg->AddEntry(Graph_Graph01, " Impulse response", "l" );
+  leg->AddEntry(Graph_Graph12, " LGAD response", "l" );
+   leg->Draw();
    c1->Modified();
    c1->cd();
    c1->SetSelected(c1);
+   c1->SaveAs("impulse_vs_lgad_response_1ns_shaping.pdf");
 }

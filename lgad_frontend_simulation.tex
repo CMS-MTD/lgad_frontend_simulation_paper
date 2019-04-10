@@ -39,6 +39,7 @@
 %% please give \usepackage{epsfig}
 
 %% The amssymb package provides various useful mathematical symbols
+
 \usepackage{amssymb}
 \usepackage{lineno}
 \usepackage{hyperref}
@@ -46,11 +47,12 @@
 \usepackage{multirow}
 \usepackage{wasysym}
 \usepackage{tabularx}
-\usepackage{mathtools}
+%\usepackage{mathtools}
 \usepackage{xcolor}
 \usepackage{booktabs,multirow}%
 \newcommand{\makecell}[2][@{}c@{}]{\begin{tabular}{#1}#2\end{tabular}}
-\usepackage[margin=1in]{geometry}% Just for this example
+
+%\usepackage[margin=1in]{geometry}% Just for this example
 %\usepackage[percent]{overpic}
 %\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 %\usepackage{cleveref}
@@ -91,7 +93,7 @@
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{Simulation of the time resolution of a 50~$\mu$m low-gain avalanche detector.}
+\title{A simulation model of front-end electronics for high-precision timing measurements with low-gain avalanche detectors.}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
@@ -114,17 +116,23 @@
 
 \begin{abstract}
 %% Text of abstract
-In this paper we report simulation results on the timing resolution of a 50~$\mu$m low-gain avalanche detector (LGAD).
-The simulation includes: sensor fluctuations, front-end electronics, and time quantization.
-Comparisons on the performance for different front-end electonics (FEE) bandwidths (BWs) are presented, as well as
-the dependance on singal-to-noise ratio (SNR).
-Two approaches to measure the timestamp are considered: leading edge (LE) and constant fraction (CF).
-Aditionally, the time resolution is studied as function of the irradiation of the sensor.
-Simulated LGAD pulses before irradiation, and after neutron fluences of
- $5\times 10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$, are studied.
- The time resolution a 50~$\mu$m LGADs was found to be ~35~\si{ps} for FE electronics BWs larger than 350~\si{MHz} and SNRs larger than 30.
- The time resolution at a SNR of 30 for fluences of $5\times 10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$ were found to be ~31~\si{ps}
-  and ~37~\si{ps}, respectively.
+In this paper we report simulation results of a study aiming to optimize some
+parameters of a detector that uses low-gain avalanche detectors (LGAD) for
+high-precision timing measurements. The detector is assumed to be composed of a
+50~$\mu$m LGAD sensor connected to a front-end electronics which is used to
+measure the time of arrival of minimum ionizing particles. The simulation
+includes modeling of signal fluctuations in LGAD, variations of the analog
+bandwidth and signal-to-noise ratio of the front-end electronics, time
+quantization (time-to-digital converter resolution), and effects of radiation damage on LGAD signals. Two approaches to
+measure the timestamp are considered: leading edge and constant fraction.
+Additionally, the time resolution is studied as function of the level of
+irradiation of the sensor. Simulated LGAD pulses before irradiation, and after
+neutron fluences of $5\times 10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$,
+are studied. The time resolution for a 50~$\mu$m LGADs was found to be ~35~\si{ps}
+for front-end electronics bandwidths larger than 350~\si{MHz} and SNRs larger
+than 30. The time resolution at a SNR of 30 for fluences of $5\times
+10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$ were found to be ~31~\si{ps}
+and ~37~\si{ps}, respectively.
 \end{abstract}
 
 \begin{keyword}
@@ -146,26 +154,24 @@ Silicon \sep Timing \sep LGAD
 %% main text
 \section{Introduction}
 
-LGADs are envisioned to be used in the CMS and ATLAS experiment upgrades for HL-LHC in order to overcome
+Low-gain avalanche diodes (LGAD) are envisioned to be used in the CMS and ATLAS experiment upgrades for HL-LHC in order to overcome
 the event reconstruction challenges posed by the high rate of concurrent
 collisions per beam crossing (pileup). The implemented regions of pseudorapidity ($\eta$)
-are: $1.6< |\eta| <2.9$, and $2.4< |\eta|<4.2$ for CMS and ATLAS, respectively.% In
-%order to achieve the desired timing precision across a large area of the
-%detectors, the sensors will need to provide high uniformity of signal response
-%and timing resolution. Beam test measurements have provided encouraging results towards achieving
-%such detectors
+are: $1.6< |\eta| <2.9$, and $2.4< |\eta|<4.2$ for CMS and ATLAS, respectively.
  Beam test measurements have demonstrated that the required time resolution,
 radiation tolerance, and uniformity of LGAD sensors can be achieved~\cite{Apresyan:2018oln}.
 %Si: We need to cite ATLAS testbeam results too right? Do they have it?
 
-In this paper, we report simulation results on the
-timing resolution of a 50~$\mu$m LGAD which includes sensor fluctuations,
-front-end electronics (FEE) noise, and time quantization.
-We scan relevant parameters for timing resolution: analog bandwidths (BWs),
-signal-to-noise ratios (SNR), and sensor irradiation.
+In this paper we report simulation results of a study aiming to optimize some
+parameters of a detector that uses 50~$\mu$m low-gain avalanche detectors (LGAD) for
+high-precision timing measurements. The simulation model includes effects due to variations in LGAD signal pulse shape and amplitude,
+different analog bandwidth and signal-to-noise ratio of the front-end electronics, time
+quantization (time-to-digital converter resolution), and effects of radiation damage on LGAD signals.
+We scan the important parameters for timing resolution: analog bandwidths (BWs),
+signal-to-noise ratios (SNR), and the total fluence that the LGAD sensor has been subjected to.
 Our results indicate that for FEE analog BWs larger than 350~\si{MHz},
-corresponding to shaping times less than 1~\si{ns}, and SNR larger than 30, time resolutions of 30--37~\si{ps} and 34--47~\si{ps}
-are obtained when using constant fraction (CF) and leading edge (LE) discrimintators, respectively.
+corresponding to shaping times less than 1~\si{ns} and SNR larger than 30, time resolutions of 30--37~\si{ps} and 34--47~\si{ps}
+are obtained when using constant fraction (CF) and leading edge (LE) discriminators, respectively.
 These results are compatible with previous measurements on LGAD timing resolutions carried out under
 laboratory and beam test conditions~\cite{Apresyan:2018oln, Cartiglia201783, PELLEGRINI201412}.
 We study the time resolution of four different FEE shaping times: $0.5$~\si{ps}, $1.0$~\si{ps},
@@ -184,56 +190,95 @@ Sec.~\ref{sec:conclusion}.
 \section{Simulation Framework}
 \label{sec:simulation}
 
-%We performed the test-beam measurements at the Fermilab Test-beam
-%Facility%
+Unprocessed signal pulses from the LGAD sensors are obtained from Weightfield2
+(WF2), a 2-dimensional silicon simulator~\cite{Sadrozinski:2017qpv}. WF2 was
+used to simulate sets of 1000 signal pulses modeling the response off
+minimum-ionizing particles (MIP) traversing the LGAD sensor, and the MIP
+impinges on the LGAD perpendicularly to its surface. Three sets of such signal
+pulses were generated for a 50~$\mu$m LGAD sensor at different levels of sensor
+irradiation: pre-irradiation, and after neutron fluences of $5\times
+10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$. Fig.~\ref{fig:lgad_current} shows the
+LGAD output current (unprocessed signal pulses) from WF2 for 1000 pulses (left)
+and example pulses for all the irradiation levels studied (right).
+ Gaussian white noise is added
+to these unprocessed signals, and the combined waveform is fed into the
+simulation of the FEE. The schematic diagram of the data flow of is illustrated
+in Fig.~\ref{fig:simulation_diagram} and described in further detail in
+Sec.~\ref{sub_sec:fee_simulation_and_noise}. The output of the FEE simulation is
+the convolution of the impulse response function and the input signal at the
+FEE. We consider four shaping constants for the impulse response of the FEE:
+0.5, 1.0, 2.0, and 4.0~\si{ns}. At the output of the FEE block, we obtain
+simulated processed LGAD pulses, which include the effects of sensor
+fluctuations, the shaping of the FEE, and noise. The resulting processed pulses
+are scaled such that the most probable value (MPV) for each of the simulated conditions is 50~\si{mV}.
+This choice of normalization does not affect the time resolution results since the SNR is
+maintained. By enforcing the same normalization for every simulation condition
+ we ensure that the LE thresholds don't have to be retuned.
 
-%The simulation framework is based on c++ programing language.  [Si: I don't think we need this right? also there's greg's stuff which is mathematica]
-Unprocessed signal pulses from the LGAD sensors are obtained from Weightfield2 (WF2), a 2-dimensional
-silicon simulator~\cite{Sadrozinski:2017qpv}. WF2 was used to simulate sets of 1000 signal pulses modeling the
-response of minimum-ionizing particles (MIP) traversing the LGAD sensor. Three sets of such signal pulses were
-generated for a 50~$\mu$m LGAD sensor at different levels of sensor irradiation: pre-irradiation, and after
-neutron fluences of $5\times 10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$.
-Gaussian white noise are added to these unprocessed signals, and the combined waveform is fed into
-the simulation of the FEE, illustrated in Fig.~\ref{fig:simulation_diagram} and described in further detail in
-Sec.~\ref{sub_sec:fee_simulation_and_noise}. The output of the FEE simulation is the convolution of the
-impulse response function and the input signal at the FEE. We consider four shaping constants for the impulse response
-of the FEE: 0.5, 1.0, 2.0, and 4.0~\si{ns}. At the output of the FEE block, we obtain simulated processed LGAD pulses,
-which include the effects of sensor fluctuations, the shaping of the FEE, and noise.
-The resulting processed pulses are scaled such that the landau-peak for each simulated condition is 50~\si{mV},
-this choice does not affect the results and it is made such that the analysis downstream is invariant.
-A waveform analysis is performed with the pulses obtained at the output of the FEE block.
-We assign timestamps to each pulse by using algorithms that emulate
-ideal LE and CF discriminators. For each threshold we obtain an LE and CF timestamp as well as the corresponding
-time-over-theshold (ToT) of the pulse. The SNR is defined as the ratio of the most probable value (MPV) of the
-amplitude distribution to the width of the amplitude distribution at a fixed sample of noise-only waveforms.
-We study three SNR scenarios: 20, 30, and 100.
-A schematic diagram of the simulation is shown in Fig.~\ref{fig:simulation_diagram}.
- %This simulation implements a more realistic version of a CF discriminator
+
+ \begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.48\textwidth]{figs/lgad_current_pre_rad_all_pulses_v2.pdf} \hfill
+   \includegraphics[width=0.48\textwidth]{figs/LGAD_current_all_irradiations_v2.pdf}
+   \caption{(Left) One thousand LGAD output current pulse from WF2 for a pre-radiation sensor.
+   (Right) example LGAD output current pulse for different irradiation levels, legend is shown in the plot.}
+   \label{fig:lgad_current}
+ \end{figure}
+
+
+A waveform analysis is performed with the pulses obtained at the output of the
+FEE block. We assign timestamps to each pulse by using algorithms that emulate
+ideal LE and CF discriminators. For each threshold we obtain an LE and CF
+timestamp as well as the corresponding time-over-theshold (ToT) of the pulse.
+The SNR is defined as the ratio of the MPV of the amplitude distribution to the
+r.m.s of the amplitude distribution at a fixed sample of noise-only waveforms.
+Fig.~\ref{fig:amp_and_noise} shows the amplitude distribution and the respective Landau fit
+from where the MPV is obatained (left) and the amplitude distribution for a fixed sample (right)
+for a pre-radiation sensor with a SNR of 30.
+We study three SNR scenarios: 20, 30, and 100. A schematic diagram of the
+simulation is shown in Fig.~\ref{fig:simulation_diagram}.
+
+
+
+%This simulation
+% implements a more
+% realistic version of a CF discriminator
 %based on signal delays.
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.48\textwidth]{figs/amplitude_1ns_landau_fit.pdf} \hfill
+  \includegraphics[width=0.48\textwidth]{figs/noise_plot_snr30.pdf}
+  \caption{(Left) Amplitude distribution after the FEE. A Landau fit is performed to obtain the MPV.
+  (Right) Amplitude distribution at a fixed sample of noise-only waveforms. A gaussian fit performed to obtain the r.m.s.
+  Both figures correspond to a pre-radiation sensor using a shaping time (ST) of 1~\si{ns} and a SNR of 30.}
+  \label{fig:amp_and_noise}
+\end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.75\textwidth]{figs/lgad_simulation_diagram.pdf}
-\caption{A schematic diagram of the simulation. Each simulation configurable block is shown in green. The most relevant outputs
-of the simulation are shown in blue.}
-\label{fig:simulation_diagram}
+\caption{A schematic diagram of the simulation. Each simulation configurable
+	block is shown in green. The most relevant outputs of the simulation are shown
+	in blue.} \label{fig:simulation_diagram}
 \end{figure}
+
 
 %\subsection{LGAD pulse library and simulation}
 %\label{sub_sec:lgad_pulse_library}
 %e need to ask Nicolo to send us a paragrah for the Weightfield2 (WF2)
 
 \subsection{Front-end electronics and noise injection}
-\label{sub_sec:fee_simulation_and_noise}
-The front-end simulation combines analytical calculations and
-numerical methods. We implement two independent simulations,
-one based on the time domain and the other on the Laplace domain. Both simulation use as input
- the unprocessed WF2 LGAD pulses. The results of the two simulations
- are in agreement within statistical uncertainties and provide a cross check of the results.
- Sections~\ref{sec:fee} and~\ref{sec:noise_simulation} describe
-the details of the implementation of the front-end and noise simulation.
-%We implement most of the calculations in the time domain, while the frequency domain is mostly used
-%to cross-check noise and the expected FEE response. Sections~\ref{sec:fee} and~\ref{sec:noise_simulation} describe
+\label{sub_sec:fee_simulation_and_noise} The front-end simulation combines
+analytical calculations and numerical methods. We implement two independent
+simulations, one based on the time domain and the other on the Laplace domain.
+Both simulation use the unprocessed WF2 LGAD pulses as input (see Fig~\ref{fig:lgad_current}).
+ The results of the two simulations are in agreement within statistical uncertainties and provide a
+cross check of the results. Sections~\ref{sec:fee}
+and~\ref{sec:noise_simulation} describe the details of the implementation of the
+front-end and noise simulation. %We implement most of the calculations in the
+% time domain, while the frequency domain is mostly used
+%to cross-check noise and the expected FEE response. Sections~\ref{sec:fee}
+% and~\ref{sec:noise_simulation} describe
 %the details of the implementation of the front-end and noise simulation.
 
 \subsubsection{Front-end simulation}\label{sec:fee}
@@ -252,21 +297,28 @@ and impulse response ($h(t)$) given by equations~\ref{eq:filter_tf} and~\ref{eq:
  \end{tabularx}\par
 %Si: I don't like this tabular way of writing the two equations much...I suggest you just make it two equations in two lines.
 
-The output pulse of the FEE is the convolution (in time domain) of the unprocessed LGAD signal pulse from WF2 and the FEE impulse response
-function, given in Eq.~\ref{eq:filter_ir}. The time base for the pulses and the convolution is 10~\si{ps}, and we use this sampling time
-throughout the simulation. As stated above we focus the study on the BW of the FEE and to that end we scan the $\tau_{s}$ paremeter
-in Eq.~\ref{eq:filter_ir} in the following set:\{0.5, 1, 2, 4\}~\si{ns}. This parameter is hereafter referred to as
-shaping time (ST). Figure~\ref{fig:ir_and_lgad} (left) shows the comparison of the impulse and LGAD responses for a ST of 1~\si{ns} while
-Figure~\ref{fig:ir_and_lgad} (right) shows the LGAD response for all STs studied. We observe that the LGAD response is delayed with respect
-to the impulse response,  and that pulse slew rate is decreased in the first nanosecond of the pulse. As expected, we also observe
-that the pulse risetime scale up with the ST and that the decay time is dominated by the ST.
-The measured risetimes (10\% to 90\%) are shown in Tab.~\ref{tab:risetime}.
-%[Si: what does it mean that decay time is ``dominated'' by ST? Dont' understand that sentence]
+The output pulse of the FEE is the convolution (in time domain) of the
+unprocessed LGAD signal pulse from WF2 and the FEE impulse response function,
+given in Eq.~\ref{eq:filter_ir}. The sampling time for the pulses and the
+convolution is 10~\si{ps}, this choice is used throughout the
+simulation. As stated above we focus the study on the BW of the FEE and to that
+end we scan the $\tau_{s}$ paremeter in Eq.~\ref{eq:filter_ir} in the following
+set:\{0.5, 1, 2, 4\}~\si{ns}. This parameter is hereafter referred to as shaping
+time (ST). Figure~\ref{fig:ir_and_lgad} (left) shows the comparison of the
+impulse and LGAD responses for a ST of 1~\si{ns} while
+Figure~\ref{fig:ir_and_lgad} (right) shows the LGAD response for all STs
+studied. We observe that the LGAD response is delayed with respect to the
+impulse response,  and that pulse slew rate is decreased in the first nanosecond
+of the pulse. As expected, we also observe that the pulse risetime scale up with
+the ST and that the decay time is dominated by the ST. We define rise time
+as the time required for the signal to rise from 10\% to 90\% of its
+amplitude, and Tab.~\ref{tab:risetime} shows the set of ST and risetimes that we studied. %[Si: what does it mean that
+% decay time is ``dominated'' by ST? Dont' understand that sentence]
 
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.48\textwidth]{figs/impulse_vs_lgad_response_1ens_shaping.pdf} \hfill
+  \includegraphics[width=0.48\textwidth]{figs/impulse_vs_lgad_response_1ns_shaping.pdf} \hfill
   \includegraphics[width=0.48\textwidth]{figs/lgad_all_shaping_time_noiseless.pdf}
   \caption{(Left) Comparison of impulse and LGAD reponses for the a shaping time (ST) of 1~\si{ns}.
   (Right) LGAD response for the four shaping times studied: \{0.5, 1, 2, 4\}~\si{ns}. All pulses have been nomalized
@@ -283,8 +335,7 @@ The measured risetimes (10\% to 90\%) are shown in Tab.~\ref{tab:risetime}.
     ST (ns) & 0.5  & 1.0 & 2.0 & 4.0 \\\hline
     Risetime (ns) & $0.67\pm 0.02$ & $0.86\pm 0.02$ & $1.36\pm 0.02$ & $2.48\pm 0.02$ \\
     \end{tabular}
-    \caption{Measured risetime for all shaping times studied: \{0.5, 1, 2, 4\}~\si{ns}. Risetime is the $10\% - 90\%$ time
-    difference as measured by the CFD algorithm described in Sec.~\ref{sec:le_and_cfd}. The uncertainty is the rms of the
+    \caption{Measured risetime for all shaping times studied: \{0.5, 1, 2, 4\}~\si{ns}. The uncertainty is the r.m.s of the
     risetime distribution.}
   \end{center}
  \end{table}
@@ -294,53 +345,61 @@ The measured risetimes (10\% to 90\%) are shown in Tab.~\ref{tab:risetime}.
 
 
 \subsubsection{Noise injection}\label{sec:noise_simulation}
-Gaussian white noise is simulated by sampling the full time window (0 - 100~\si{ns}) in 10~\si{ps} intervals. Each
-sampled time is assign a random amplitude which is drawn from a gaussian distribution with zero mean and width corresponding to the SNR
+Gaussian white noise is simulated by sampling every 10~\si{ps}. Each
+sampled time is assigned a random amplitude which is drawn from a gaussian distribution with zero mean and width corresponding to the SNR
 under study. It is important to note that the width of the gausian parameter is not exactly the SNR and needs to be adjusted depending
 on the ST of the FEE. The left panel of Figure~\ref{fig:noise} shows the gaussian white noise before and after a 1~\si{ns} FEE.
-The expected behavior for the noise is observed. The left panel of Figure~\ref{fig:noise} shows the output of the
+We see a clear shaping in the time structure of the noise.
+We checked that the average noise power spectrum is flat in the frequency domain up to
+at least 10 GHz. We observe the expected $\sqrt(\mathrm{BW})$ scaling of the noise after
+ the FEE for all the STs under study. The right panel of Figure~\ref{fig:noise} shows the output of the
 FEE block, with a 1~\si{ns} ST, for a pre-irradiated LGAD pulse after noise has been injected. The injected noise is
-such that the SNR is 30. SNR is defined ratio of the landau peak (the most probable value or MPV) of the pulse height distribution to the
-the r.m.s of the 100th sample over an ensemble of 1000 pulses.
+such that the SNR is 30. SNR is defined as the ratio of the most probable value (MPV) of the pulse height distribution to the
+the r.m.s of the 100th sample, over an ensemble of 1000 pulses.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.48\textwidth]{figs/noise_vs_shaped_noise.pdf} \hfill
   \includegraphics[width=0.48\textwidth]{figs/lgad_pre_rad_st_1ns_snr_30.pdf}
-  \caption{(Left) Comparison of gaussian white noise before and after the FEE.
-  (Right) Example pulse at the output of the FEE block with a SNR of 30. Both figure use a shaping time (ST) of 1~\si{ns}. Legends for the shaping times are shown in the plots.}
+  \caption{(Left) Comparison of gaussian white noise before and after the FEE, legend is shown in plot.
+  (Right) Example pulse at the output of the FEE block with a SNR of 30. Both figure use a shaping time (ST) of 1~\si{ns}.}
   \label{fig:noise}
 \end{figure}
 
 \section{Timing Reconstruction and Analysis}\label{sec:timing_and_analysis}
-The time reconstruction is based on waveform analysis. We generate an ensamble of 1000 pulses sampled every 10 ps.
-Each pulse is interpolated using the Whittaker-Shannon formula (sin(x)/x). Using the interpolated pulse we assign a timestamp by finding when
+The time reconstruction is based on waveform analysis. We generate an ensemble of 1000 pulses sampled every 10 ps.
+Each pulse is interpolated using the Whittaker-Shannon formula~\cite{whittaker_1915,shannon_1935}
+\begin{equation}\label{eq:WS}
+  f(t) = \sum f(k\mathrm{T})\frac{sin(\pi(t/\mathrm{T} - k))}{\pi(t/\mathrm{T} - k)}.
+\end{equation}
+
+Where f is pulse we want to interpolate, $t$ is the continuous time variable,
+$k =0, \pm 1, \pm 2, ...$, and T is the sampling time (10~\si{ps}).
+Using the interpolated pulse we assign a timestamp by finding when
 a given voltage threshold has been crossed. The threshold can be a constant value (LE) or a constant fraction
  of the pulse height (CF).
-In the case of the CFD we also simulate more \textit{realistic} implementations:{\color{red}split-and-delay as well as asecond order RC filter (Greg, please check naming)}.
+In the case of the CFD we also simulate more realistic implementations: {\color{red}split-and-delay as well as as second order RC filter (Greg, please check naming)}.
  More details about the algorithms are given in Sec.~\ref{sec:le_and_cfd}. The time resolution is estimated by the width parameter
 of a gaussian fit to the timestamps obtained for a particular theshold. We apply a time-walk correction based on the
 time-over-threshold of the pulse. We note that this correction has a large improvement on the time resolution measured
 using the LE algorithm while the CF algorithm is mostly insentive to this correction, as seen in Fig.~\ref{fig:time_resolution_scan}.
-Details about this correction are covered in Sec.~\ref{sec:tw_and_tot}. The timestamps are measured with a
-20~\si{ps} binning while the time-over-thershold is measured with a 100~\si{ps} binning in order to simulate the effect of time quantization.
-We scan the LE and CF threshold such that we find the one with the lowest jitter.
+Details about this correction are covered in Sec.~\ref{sec:tw_and_tot}.
+%The timestamps are measured with a 20~\si{ps} binning while the time-over-threshold is measured with a 100~\si{ps} binning in order to simulate the effect of time quantization.
+We scan the LE and CF threshold such that we find the one with the best time resolution.
 
 \subsection{Leading edge and constant fraction discriminators}\label{sec:le_and_cfd}
 The leading edge and constant fraction discriminator algorithms are \textit{ideal} in the sense that they don't simulate the effect of
 electronics in a real implementation. Our approach is to sample the pulses every 10~\si{ps} and subsequently interpolate them
-using the Whittaker-Shannon formula (sin(x)/x) to more accurately determine the threshold crossing. In the LE case the theshold is scanned
-from 3--60~\si{mV}, while the CFD is scanned from 5--90~\% of the current pulse maximum amplitude. For each thershold we obtain two
+using the Whittaker-Shannon formula (sin(x)/x) to more accurately determine the threshold crossing. In the LE case the threshold is scanned
+from 3--60~\si{mV}, while the CFD is scanned from 5--90~\% of the current pulse maximum amplitude. For each threshold we obtain two
 timestamps: when the pulse first crosses the threshold ($t_{0}$) and when it crosses the second time ($t_{1}$), now in the opposite
 direction. The time-over-threshold is defined as the difference of the two timestamps ($\mathrm{ToT} = t_{1} - t_{0}$). The first
 timestamp, $t_{0}$, is used to determine the time resolution at given threshold. The time resolution is defined as the width of
 a gaussian fit to the $t_{0}$ distribution binned with a bin-width of 20~\si{ps}. The time resolution is obtained in two cases:
 before and after a time-walk correction. The time-walk correction aims to correct the known effect of time drift as a function
 of the pulse height. The time-walk correction removes this time drift and ensures that the time response is flat as a function
-of the pulse height. It is explained in greater detail in Sec.~\ref{sec:tw_and_tot}.
-Figure~\ref{fig:time_resolution_scan} shows the time resolution as a function
+of the pulse height. Figure~\ref{fig:time_resolution_scan} shows the time resolution as a function
 of the threshold required for a pre-irradiated LGAD sensor with a ST of 1~\si{ns} and a SNR of 30.
-We note that the effect of the time-walk correction is large for LE and almost negligible for CF.
 Fig.~\ref{fig:time_res} shows a typical $t_{0}$ distribution, using the LE and CF algorithms, for the pre-irradiated
 LGAD sensor after the ToT correction has been applied. The time resolution ($\sigma_{t}$) is measured to be $37.3 \pm 1.4 $
 and $33.0 \pm 1.4$ for the LE and CF, respectively. Additionally, we study more \textit{realistic} CFD implementations:
@@ -349,7 +408,7 @@ and $33.0 \pm 1.4$ for the LE and CF, respectively. Additionally, we study more 
  The second order RC filter shows a degradation on performance with respect to the split-and-delay implementation.
 
 \subsubsection{constant fraction discriminator implementations}\label{sed:cfd_realistic}
-{\color{red}GREG: PLEASE ADD TEXT HERE, I called the two implementations split-and-delay and second order RC previousluy in the text (also in red)}.
+{\color{red}GREG: PLEASE ADD TEXT HERE, I called the two implementations split-and-delay and second order RC previously in the text (also in red)}.
 
 
   \begin{figure}[htbp]
@@ -367,9 +426,9 @@ and $33.0 \pm 1.4$ for the LE and CF, respectively. Additionally, we study more 
     \includegraphics[width=0.48\textwidth]{figs/pre_rad_st_1ns_snr_30_le_tot_threshold_30mV.pdf} \hfill
     \includegraphics[width=0.48\textwidth]{figs/pre_rad_st_1ns_snr_30_cfd_tot_threshold_35_percent_v2.pdf}
     \caption{(Left) timestamp ($t_{0}$) distribution for a 30~\si{mV} threshold using a leading edge discriminator.
-    (Left) timestamp ($t_{0}$) distribution for a 35\% threshold using a constant fraction discriminator. Both figures
+    (Right) timestamp ($t_{0}$) distribution for a 35\% threshold using a constant fraction discriminator. Both figures
     include the time-walk correction based on the measured ToT.
-    Both figures use a shaping time (ST) of 1~\si{ns} and correspond to SNR of 30.}
+    Both figures use pre-radiated unprocessed pulses, a shaping time (ST) of 1~\si{ns}, and correspond to SNR of 30.}
     \label{fig:time_res}
   \end{figure}
 
@@ -380,12 +439,12 @@ The correction is based on the measured time-over-theshold: $\mathrm{ToT} = t_{1
 is large for the LE case and negligible for CF (see Fig.~\ref{fig:time_resolution_scan}).
 Figure~\ref{fig:ToT} (left) shows a typical two dimensional map of $t_{0}$ and ToT for the
 LE algorithm, wherein a clear correlation between $t_{0}$ and ToT is observed. The time-walk correction is obtain by measuring the average
-$t_{0}$ in each ToT bin and subsequently fitting a 2nd-order polinomial (see Fig.~\ref{fig:ToT} (right)).
+$t_{0}$ in each ToT bin and subsequently fitting a 2nd-order polynomial (see Fig.~\ref{fig:ToT} (right)).
 The resulting analytical expression after the fit is then used to correct and flatten the dependence of $t_{0}$ on ToT.
 The time-walk correction is expressed in Eq.~\ref{eq:time_walk}, where $p_{2}$ and $p_{1}$ are the quadratic
 and linear coefficients of the 2nd-oder polynomial fit. Different corrections are derived for each simulation scenario
 characterized by the values of the simulation parameters: ST, SNR, and LGAD irradiation level.
-As shown in Fig.~\ref{fig:time_resolution_scan} (left) the effect of the time-walk dependes on the threshold used and correcting for it
+As shown in Fig.~\ref{fig:time_resolution_scan} (left) the effect of the time-walk depends on the threshold used and correcting for it
 can yield significant improvements in the measured time resolution.
 
 \begin{equation}\label{eq:time_walk}
@@ -407,13 +466,15 @@ can yield significant improvements in the measured time resolution.
 
 \section{LGAD Front-end Electronics Performance}\label{sec:results}
 
-Herein we present a number of studies for a 50~$\mu$m LGAD. We study the time resolution as a function of irradiation
-for three different scenarios: pre-radiation, and after neutron fluences of
- $5\times 10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$. We also quantify the effect of the BW of the FEE by varying the
- the ST ($\tau_{s}$), four STs are considerd: 0.5, 1, 2, and 4~\si{ns}. Additionally, we study the effect of noise by varying
- the SNR in all the scenarios described above. We consider three SNRs: 20, 30, and 100.
- Sec.~\ref{sec:shaping_time} summarizes the effects of the shaping time and SNR, and
-and Sec.~\ref{sec:rad_tolerance} summarizes the effect of irradiation.
+The FEE performance is studied as a function of irradiation for three different
+scenarios: pre-radiation, and after neutron fluences of $5\times
+10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$. We also quantify the effect of
+the BW of the FEE by varying the the ST ($\tau_{s}$), four STs are considered:
+0.5, 1, 2, and 4~\si{ns}. Additionally, we study the effect of noise by varying
+the SNR in all the scenarios described above. We consider three SNRs: 20, 30,
+and 100. Sec.~\ref{sec:shaping_time} summarizes the effects of the shaping time
+and SNR, and and Sec.~\ref{sec:rad_tolerance} summarizes the effect of
+irradiation.
 
 
 
@@ -425,9 +486,9 @@ where the CF results are from the \textit{ideal} implementation. The {\color{red
  longer STs are more affected by less favorable SNR. For example, for an SNR of 20, the time resolution is ~37~\si{ps} and ~100~\si{ps} for a
 ST of 0.5~\si{ns} and 4.0~\si{ns}, respectively. We note that CF consistently outperforms LE, and this effect is also observed
  for less favorable SNR and slower ST. Comparing CF and LE for the 1.0~\si{ns} ST with SNR of 20 yields a difference in performance of
- 26~\si{ps} (when subtrated in quadrature). Additionally, we observe that time resolutions better than 25~\si{ps} could not be achieved which
+ 26~\si{ps}, when subtracted in quadrature. Additionally, we observe that time resolutions better than 25~\si{ps} could not be achieved which
  is consistent with the known intrinsic jitter of the LGAD sensor. The latter is taken into account by the WF2 simulation and
-confirmed in our study. For a SNR of 1000, essentially with zero noise, we obtained a time resolution consistent with 25~\si{ps}.
+confirmed in our study. For a SNR of 1000 we obtained a time resolution consistent with 25~\si{ps}.
 Finally, in the case of the pre-irradiated sensor we observed that time resolutions of ~35~\si{ps} are achievable for
 STs between 0.5 - 1.0~\si{ns} and a SNR of 30.
 
@@ -498,7 +559,7 @@ studied for a 2~\si{ns} ST. We observe a 50~\si{ps} degradation for a SNR of 20 
 
 %\subsection{Timing Performace as a function of signal-to-noise ratio}
 %\label{sec:snr}
-\subsection{Timing performace as a function of irradiation}\label{sec:rad_tolerance}
+\subsection{Timing performance as a function of irradiation}\label{sec:rad_tolerance}
 We study the effect of irradiation on the time resolution of a 50~$\mu$m LGAD sensor. The impact of irradiation on the unprocessed
 signal pulse shapes are accounted for by the WF2 simulation. We consider three cases: pre-irradiated, and neutron fluences of
 $5\times 10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$. We perform the same studies as in the pre-irradiated case discussed in
@@ -511,20 +572,19 @@ of ~31~\si{ps} and ~37~\si{ps} are obtained for $5\times 10^{14}$~n/cm$^2$ and $
 
 \section{Conclusion}\label{sec:conclusion}
 
-We study the time resolution of a 50~$\mu$m LGAD sensor using a simulation framework that includes the
-modeling of the raw unprocessed LGAD signal pulse, the front-end electronics, and the quantization.
-We focus on the shaping time and sigal-to-noise ratio of the front-end electronics and its interplay
+We study the time resolution of a 50~$\mu$m Low-gain avalanche diode (LGAD) sensor using a simulation framework that includes the
+modeling of the raw unprocessed LGAD signal pulse, the front-end electronics, and effects of analog-to-digital converter resolution.
+We focus on the shaping time (ST) and signal-to-noise ratio (SNR) of the front-end electronics and its interplay
 with the irradiation level of the sensor. We reproduce the known LGAD jitter of ~25~\si{ps}
 for fast STs and large SNRs. We observe a clear degradation of the time resolution with SNR and slower STs. The best results are
-obtained using a ST of 0.5~\si{ns} and using CF discriminator, and similar results are obtained with a ST of 1.0~\si{ns}. For a SNR of 30
-and for STs betwen 0.5-1.0~\si{ns} we obtain time resoutions between ~30 - 37~\si{ps} for the 3 irradiations considered. The
+obtained using a ST of 0.5~\si{ns} and using constant fraction (CF) discriminator, and similar results are obtained with a ST of 1.0~\si{ns}. For a SNR of 30
+and for STs between 0.5-1.0~\si{ns} we obtain time resolutions between ~30 - 37~\si{ps} for the 3 irradiations considered. The
 reduction in gain with irradiation could bring the SNR for the most irradiated LGAD ($1\times 10^{15}$~n/cm$^2$) to 20 and thus
-worsen the time resolution to ~42 - 47~\si{ps}. We note a clear gain in performace of CF over LE discriminators, particularly at
+worsen the time resolution to ~42 - 47~\si{ps}. We note a clear gain in performance of CF over leading edge (LE) discriminators, particularly at
 low SNR and the largest irradiation level. For an ST of 1.0~\si{ns} at SNR = 30, the performance improvement of CF over LE
 is ~26\si{ps} for the pre-irradiated sensor and ~37\si{ps} for the irradiated sensor with neutron fluence of
-$1\times 10^{15}$~n/cm$^2$. A performance degradiation is observed when using a {\color{red}second order RC} implementation of the CFD,
- specially at lower SNRs.
- Overall our simulation results indicate that time resolutions better than
+$1\times 10^{15}$~n/cm$^2$. A performance degradation is observed when using a {\color{red}second order RC} implementation of the CFD,
+especially at lower SNRs. Overall our simulation results indicate that time resolutions better than
 45~\si{ps} are achievable for a 50~$\mu$m LGADs for irradiation levels up to neutron fluences of $1\times 10^{15}$~n/cm$^2$.
 
 
@@ -547,7 +607,7 @@ Facility. Fermilab is managed by Fermi Research Alliance, LLC (FRA), acting
 under Contract No. DE-AC02-07CH11359. Part of this work was performed within the
 framework of the CERN RD50 collaboration.
 
-This work was supported by the Fermilab LDRD 2017.027; by the United States
+This work was supported by the Fermilab LDRD 2017.027 {\color{red} (Cristian: did Artur ask to include LDRD here?)}; by the United States
 Department of Energy grant DE-FG02-04ER41286; by the California Institute of
 Technology High Energy Physics under Contract DE-SC0011925; by the European
 Union's Horizon 2020 Research and Innovation funding program, under Grant

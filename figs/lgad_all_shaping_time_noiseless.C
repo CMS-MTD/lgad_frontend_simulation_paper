@@ -10,7 +10,7 @@ void lgad_all_shaping_time_noiseless()
    c1->SetBorderSize(2);
    c1->SetFrameBorderMode(0);
    c1->SetFrameBorderMode(0);
-   
+
    TH2F *htemp__1 = new TH2F("htemp__1","0.36705330*0.99206349*33.*channel:time-20 {i_evt==0}",40,-20,85,40,0,54);
    htemp__1->SetDirectory(0);
    htemp__1->SetStats(0);
@@ -37,7 +37,7 @@ void lgad_all_shaping_time_noiseless()
    htemp__1->GetZaxis()->SetTitleSize(0.035);
    htemp__1->GetZaxis()->SetTitleFont(42);
    htemp__1->Draw("");
-   
+
    TPaveText *pt = new TPaveText(0.15,0.9368947,0.85,0.995,"blNDC");
    pt->SetName("title");
    pt->SetBorderSize(0);
@@ -45,7 +45,7 @@ void lgad_all_shaping_time_noiseless()
    pt->SetFillStyle(0);
    pt->SetTextFont(42);
    pt->Draw();
-   
+
    Double_t Graph0_fx1[10000] = {
    -20,
    -19.99,
@@ -20057,7 +20057,7 @@ void lgad_all_shaping_time_noiseless()
    graph->SetMarkerColor(8);
    graph->SetMarkerStyle(20);
    graph->SetMarkerSize(0.2);
-   
+
    TH1F *Graph_Graph01 = new TH1F("Graph_Graph01","Graph",10000,-29.999,89.989);
    Graph_Graph01->SetMinimum(0);
    Graph_Graph01->SetMaximum(55.00059);
@@ -20080,9 +20080,9 @@ void lgad_all_shaping_time_noiseless()
    Graph_Graph01->GetZaxis()->SetTitleSize(0.035);
    Graph_Graph01->GetZaxis()->SetTitleFont(42);
    graph->SetHistogram(Graph_Graph01);
-   
+
    graph->Draw("p");
-   
+
    Double_t Graph1_fx2[10000] = {
    -20,
    -19.99,
@@ -40093,7 +40093,7 @@ void lgad_all_shaping_time_noiseless()
    graph->SetLineColor(ci);
    graph->SetMarkerStyle(20);
    graph->SetMarkerSize(0.2);
-   
+
    TH1F *Graph_Graph12 = new TH1F("Graph_Graph12","Graph",10000,-29.999,89.989);
    Graph_Graph12->SetMinimum(0);
    Graph_Graph12->SetMaximum(55.01029);
@@ -40116,9 +40116,9 @@ void lgad_all_shaping_time_noiseless()
    Graph_Graph12->GetZaxis()->SetTitleSize(0.035);
    Graph_Graph12->GetZaxis()->SetTitleFont(42);
    graph->SetHistogram(Graph_Graph12);
-   
+
    graph->Draw("p");
-   
+
    Double_t Graph2_fx3[10000] = {
    -20,
    -19.99,
@@ -60130,7 +60130,7 @@ void lgad_all_shaping_time_noiseless()
    graph->SetMarkerColor(2);
    graph->SetMarkerStyle(20);
    graph->SetMarkerSize(0.2);
-   
+
    TH1F *Graph_Graph23 = new TH1F("Graph_Graph23","Graph",10000,-29.999,89.989);
    Graph_Graph23->SetMinimum(0);
    Graph_Graph23->SetMaximum(55.01809);
@@ -60153,9 +60153,9 @@ void lgad_all_shaping_time_noiseless()
    Graph_Graph23->GetZaxis()->SetTitleSize(0.035);
    Graph_Graph23->GetZaxis()->SetTitleFont(42);
    graph->SetHistogram(Graph_Graph23);
-   
+
    graph->Draw("p");
-   
+
    Double_t Graph3_fx4[10000] = {
    -20,
    -19.99,
@@ -80167,7 +80167,7 @@ void lgad_all_shaping_time_noiseless()
    graph->SetMarkerColor(4);
    graph->SetMarkerStyle(20);
    graph->SetMarkerSize(0.2);
-   
+
    TH1F *Graph_Graph34 = new TH1F("Graph_Graph34","Graph",10000,-29.999,89.989);
    Graph_Graph34->SetMinimum(0);
    Graph_Graph34->SetMaximum(55.05216);
@@ -80190,9 +80190,39 @@ void lgad_all_shaping_time_noiseless()
    Graph_Graph34->GetZaxis()->SetTitleSize(0.035);
    Graph_Graph34->GetZaxis()->SetTitleFont(42);
    graph->SetHistogram(Graph_Graph34);
-   
+
    graph->Draw("p");
+   TLegend* leg = new TLegend( 0.65, 0.6, 0.8, 0.85, NULL, "brNDC" );
+  leg->SetBorderSize(0);
+  leg->SetLineColor(1);
+  leg->SetLineStyle(1);
+  leg->SetLineWidth(1);
+  leg->SetFillColor(0);
+  leg->SetFillStyle(1001);
+  leg->SetTextSize(0.04);
+  Graph_Graph01->SetMarkerColor(kBlue);
+  Graph_Graph01->SetLineColor(kBlue);
+  Graph_Graph01->SetLineWidth(2);
+
+  Graph_Graph12->SetMarkerColor(kRed);
+  Graph_Graph12->SetLineColor(kRed);
+  Graph_Graph12->SetLineWidth(2);
+
+  Graph_Graph23->SetMarkerColor(kBlack);
+  Graph_Graph23->SetLineColor(kBlack);
+  Graph_Graph23->SetLineWidth(2);
+
+  Graph_Graph34->SetMarkerColor(kGreen+1);
+  Graph_Graph34->SetLineColor(kGreen+1);
+  Graph_Graph34->SetLineWidth(2);
+
+  leg->AddEntry(Graph_Graph01, " #tau_{s} = 0.5 ns", "l" );
+  leg->AddEntry(Graph_Graph12, " #tau_{s} = 1.0 ns", "l" );
+  leg->AddEntry(Graph_Graph23, " #tau_{s} = 2.0 ns", "l" );
+  leg->AddEntry(Graph_Graph34, " #tau_{s} = 4.0 ns", "l" );
+   leg->Draw();
    c1->Modified();
    c1->cd();
    c1->SetSelected(c1);
+   c1->SaveAs("lgad_all_shaping_time_noiseless.pdf");
 }
