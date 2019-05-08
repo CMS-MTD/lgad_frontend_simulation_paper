@@ -1,0 +1,86 @@
+void noise_plot_snr30()
+{
+//=========Macro generated from canvas: c1/c1
+//=========  (Tue Apr  2 17:27:57 2019) by ROOT version 6.13/02
+   TCanvas *c1 = new TCanvas("c1", "c1",10,45,700,502);
+   c1->Range(-25,-31.77124,25,285.9411);
+   c1->SetFillColor(0);
+   c1->SetBorderMode(0);
+   c1->SetBorderSize(2);
+   c1->SetFrameBorderMode(0);
+   c1->SetFrameBorderMode(0);
+   
+   TH1F *tmp2__1 = new TH1F("tmp2__1","",40,-20,20);
+   tmp2__1->SetBinContent(16,7);
+   tmp2__1->SetBinContent(17,32);
+   tmp2__1->SetBinContent(18,73);
+   tmp2__1->SetBinContent(19,164);
+   tmp2__1->SetBinContent(20,225);
+   tmp2__1->SetBinContent(21,227);
+   tmp2__1->SetBinContent(22,148);
+   tmp2__1->SetBinContent(23,93);
+   tmp2__1->SetBinContent(24,25);
+   tmp2__1->SetBinContent(25,5);
+   tmp2__1->SetBinContent(26,1);
+   tmp2__1->SetEntries(1000);
+   tmp2__1->SetStats(0);
+   
+   TF1 *PrevFitTMP1 = new TF1("PrevFitTMP","gaus",-20,20, TF1::EAddToList::kNo);
+   PrevFitTMP1->SetFillColor(19);
+   PrevFitTMP1->SetFillStyle(0);
+   PrevFitTMP1->SetLineColor(2);
+   PrevFitTMP1->SetLineWidth(2);
+   PrevFitTMP1->SetChisquare(401.1759);
+   PrevFitTMP1->SetNDF(8);
+   PrevFitTMP1->GetXaxis()->SetLabelFont(42);
+   PrevFitTMP1->GetXaxis()->SetLabelSize(0.035);
+   PrevFitTMP1->GetXaxis()->SetTitleSize(0.035);
+   PrevFitTMP1->GetXaxis()->SetTitleFont(42);
+   PrevFitTMP1->GetYaxis()->SetLabelFont(42);
+   PrevFitTMP1->GetYaxis()->SetLabelSize(0.035);
+   PrevFitTMP1->GetYaxis()->SetTitleSize(0.035);
+   PrevFitTMP1->GetYaxis()->SetTitleOffset(0);
+   PrevFitTMP1->GetYaxis()->SetTitleFont(42);
+   PrevFitTMP1->SetParameter(0,234.3804);
+   PrevFitTMP1->SetParError(0,0.7046973);
+   PrevFitTMP1->SetParLimits(0,0,0);
+   PrevFitTMP1->SetParameter(1,-0.004305339);
+   PrevFitTMP1->SetParError(1,0.005923986);
+   PrevFitTMP1->SetParLimits(1,0,0);
+   PrevFitTMP1->SetParameter(2,1.707503);
+   PrevFitTMP1->SetParError(2,0.005940541);
+   PrevFitTMP1->SetParLimits(2,0,16.80476);
+   PrevFitTMP1->SetParent(tmp2__1);
+   tmp2__1->GetListOfFunctions()->Add(PrevFitTMP1);
+   tmp2__1->SetLineColor(4);
+   tmp2__1->SetMarkerColor(4);
+   tmp2__1->SetMarkerStyle(20);
+   tmp2__1->GetXaxis()->SetTitle("Noise [mV]");
+   tmp2__1->GetXaxis()->SetLabelFont(42);
+   tmp2__1->GetXaxis()->SetLabelSize(0.035);
+   tmp2__1->GetXaxis()->SetTitleSize(0.06);
+   tmp2__1->GetXaxis()->SetTitleOffset(0.73);
+   tmp2__1->GetXaxis()->SetTitleFont(42);
+   tmp2__1->GetYaxis()->SetTitle("events / 1 [mV]");
+   tmp2__1->GetYaxis()->SetLabelFont(42);
+   tmp2__1->GetYaxis()->SetLabelSize(0.035);
+   tmp2__1->GetYaxis()->SetTitleSize(0.06);
+   tmp2__1->GetYaxis()->SetTitleOffset(0.67);
+   tmp2__1->GetYaxis()->SetTitleFont(42);
+   tmp2__1->GetZaxis()->SetLabelFont(42);
+   tmp2__1->GetZaxis()->SetLabelSize(0.035);
+   tmp2__1->GetZaxis()->SetTitleSize(0.035);
+   tmp2__1->GetZaxis()->SetTitleFont(42);
+      tmp2__1->Draw("E1");
+   TLatex *tex = new TLatex();
+   tex->SetNDC();
+   tex->SetTextSize(0.050);
+   tex->SetTextFont(42);
+   tex->SetTextColor(kBlack);
+   tex->DrawLatex(0.13, 0.75, "r.m.s = 1.71 #pm 0.01 mV");
+   tex->Draw();
+   c1->Modified();
+   c1->cd();
+   c1->SetSelected(c1);
+   c1->SaveAs("noise_plot_snr30.pdf");
+}
