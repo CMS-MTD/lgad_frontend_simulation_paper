@@ -171,11 +171,11 @@ We scan the important parameters for timing resolution: analog bandwidths (BWs),
 signal-to-noise ratios (SNR), and the total fluence that the LGAD sensor has been subjected to.
 Our results indicate that for FEE analog BWs larger than 350~\si{MHz},
 corresponding to shaping times less than 1~\si{ns} and SNR larger than 30, time resolutions of 30--37~\si{ps} and 34--47~\si{ps}
-are obtained when using constant fraction (CF) and leading edge (LE) discriminators, respectively.
+are obtained when using constant fraction (CF) and leading edge (LE) discriminators in their ideal mathematical implementations , respectively.
 These results are compatible with previous measurements on LGAD timing resolutions carried out under
 laboratory and beam test conditions~\cite{Apresyan:2018oln, Cartiglia201783, PELLEGRINI201412}.
-We study the time resolution of four different FEE shaping times: $0.5$~\si{ps}, $1.0$~\si{ps},
-$2.0$~\si{ps}, and $4.0$~\si{ps}; three SNR: 20, 30, 100; and three sensor irradiation
+We study the time resolution of four different FEE shaping times: $0.5$, $1.0$,
+$2.0$, and $4.0$~\si{ps}; three SNR: 20, 30, 100; and three sensor irradiation
 levels: pre-radiation, $5\times 10^{14}$~n/cm$^2$, and $1\times 10^{15}$~n/cm$^2$.
 For every point in this scan we evaluate the time resolution for LE and CF.
 Our results are a guideline on what time resolution can
@@ -198,30 +198,30 @@ impinges on the LGAD perpendicularly to its surface. Three sets of such signal
 pulses were generated for a 50~$\mu$m LGAD sensor at different levels of sensor
 irradiation: pre-irradiation, and after neutron fluences of $5\times
 10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$. Fig.~\ref{fig:lgad_current} shows the
-LGAD output current (unprocessed signal pulses) from WF2 for 1000 pulses (left)
+unprocessed LGAD output current from WF2 for 1000 signal pulses (left)
 and example pulses for all the irradiation levels studied (right).
- Gaussian white noise is added
+Gaussian white noise is added later
 to these unprocessed signals, and the combined waveform is fed into the
-simulation of the FEE. The schematic diagram of the data flow of is illustrated
+simulation of the FEE. The schematic diagram of the data flow is illustrated
 in Fig.~\ref{fig:simulation_diagram} and described in further detail in
 Sec.~\ref{sub_sec:fee_simulation_and_noise}. The output of the FEE simulation is
 the convolution of the impulse response function and the input signal at the
-FEE. We consider four shaping constants for the impulse response of the FEE:
+FEE. We consider four time constants for the impulse response of the FEE:
 0.5, 1.0, 2.0, and 4.0~\si{ns}. At the output of the FEE block, we obtain
 simulated processed LGAD pulses, which include the effects of sensor
 fluctuations, the shaping of the FEE, and noise. The resulting processed pulses
 are scaled such that the most probable value (MPV) for each of the simulated conditions is 50~\si{mV}.
 This choice of normalization does not affect the time resolution results since the SNR is
 maintained. By enforcing the same normalization for every simulation condition
- we ensure that the LE thresholds don't have to be retuned.
+ we ensure that the LE thresholds occur at the same proportion to the pulse maximum. 
 
 
  \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.48\textwidth]{figs/lgad_current_pre_rad_all_pulses_v2.pdf} \hfill
    \includegraphics[width=0.48\textwidth]{figs/LGAD_current_all_irradiations_v2.pdf}
-   \caption{(Left) One thousand LGAD output current pulse from WF2 for a pre-radiation sensor.
-   (Right) example LGAD output current pulse for different irradiation levels, legend is shown in the plot.}
+   \caption{(Left) One thousand LGAD output current pulses from WF2 for a pre-radiation sensor.
+   (Right) Example LGAD output current pulses for different irradiation levels.}
    \label{fig:lgad_current}
  \end{figure}
 
@@ -231,7 +231,7 @@ FEE block. We assign timestamps to each pulse by using algorithms that emulate
 ideal LE and CF discriminators. For each threshold we obtain an LE and CF
 timestamp as well as the corresponding time-over-theshold (ToT) of the pulse.
 The SNR is defined as the ratio of the MPV of the amplitude distribution to the
-r.m.s of the amplitude distribution at a fixed sample of noise-only waveforms.
+r.m.s of the amplitude distribution of sampled noise-only waveforms.
 Fig.~\ref{fig:amp_and_noise} shows the amplitude distribution and the respective Landau fit
 from where the MPV is obatained (left) and the amplitude distribution for a fixed sample (right)
 for a pre-radiation sensor with a SNR of 30.
@@ -269,22 +269,19 @@ simulation is shown in Fig.~\ref{fig:simulation_diagram}.
 
 \subsection{Front-end electronics and noise injection}
 \label{sub_sec:fee_simulation_and_noise} The front-end simulation combines
-analytical calculations and numerical methods. We implement two independent
-simulations, one based on the time domain and the other on the Laplace domain.
+analytical and numerical calculations. We implement two independent
+paths of simulations, one based on the time domain and the other on the Laplace domain.
 Both simulation use the unprocessed WF2 LGAD pulses as input (see Fig~\ref{fig:lgad_current}).
  The results of the two simulations are in agreement within statistical uncertainties and provide a
 cross check of the results. Sections~\ref{sec:fee}
 and~\ref{sec:noise_simulation} describe the details of the implementation of the
-front-end and noise simulation. %We implement most of the calculations in the
-% time domain, while the frequency domain is mostly used
-%to cross-check noise and the expected FEE response. Sections~\ref{sec:fee}
-% and~\ref{sec:noise_simulation} describe
-%the details of the implementation of the front-end and noise simulation.
+front-end and noise simulation. 
 
 \subsubsection{Front-end simulation}\label{sec:fee}
-The front-end simulation is based on a single amplification stage. We focus on the BW of such an amplifier rather than variations
-thereof. The FEE is a second order low-pass filter with transfer function ($H(S)$)
+The front-end simulation is based on a single amplification stage. 
+The FEE is a second order low-pass filter with transfer function ($H(S)$)
 and impulse response ($h(t)$) given by equations~\ref{eq:filter_tf} and~\ref{eq:filter_ir}, respectively.
+It realizes a $\mathrm{CR-RC}^{3}$-type filter~\cite{}.
 
  \begin{tabularx}{\textwidth}{XX}
  \begin{equation}\label{eq:filter_tf}
@@ -297,32 +294,31 @@ and impulse response ($h(t)$) given by equations~\ref{eq:filter_tf} and~\ref{eq:
  \end{tabularx}\par
 %Si: I don't like this tabular way of writing the two equations much...I suggest you just make it two equations in two lines.
 
+
 The output pulse of the FEE is the convolution (in time domain) of the
 unprocessed LGAD signal pulse from WF2 and the FEE impulse response function,
-given in Eq.~\ref{eq:filter_ir}. The sampling time for the pulses and the
+given in Eq.~\ref{eq:filter_ir}. The sampling period for the pulses and the
 convolution is 10~\si{ps}, this choice is used throughout the
 simulation. As stated above we focus the study on the BW of the FEE and to that
-end we scan the $\tau_{s}$ paremeter in Eq.~\ref{eq:filter_ir} in the following
+end we scan the $\tau_{s}$ parameter in Eq.~\ref{eq:filter_ir} in the following
 set:\{0.5, 1, 2, 4\}~\si{ns}. This parameter is hereafter referred to as shaping
 time (ST). Figure~\ref{fig:ir_and_lgad} (left) shows the comparison of the
-impulse and LGAD responses for a ST of 1~\si{ns} while
+impulse response and a characteristic example LGAD response for a ST of 1~\si{ns} while
 Figure~\ref{fig:ir_and_lgad} (right) shows the LGAD response for all STs
-studied. We observe that the LGAD response is delayed with respect to the
+studied. We observe that the LGAD response peaks later with respect to the
 impulse response,  and that pulse slew rate is decreased in the first nanosecond
-of the pulse. As expected, we also observe that the pulse risetime scale up with
-the ST and that the decay time is dominated by the ST. We define rise time
-as the time required for the signal to rise from 10\% to 90\% of its
-amplitude, and Tab.~\ref{tab:risetime} shows the set of ST and risetimes that we studied. %[Si: what does it mean that
-% decay time is ``dominated'' by ST? Dont' understand that sentence]
-
+of the pulse. As expected, we also observe that the pulse risetime, defined as
+the time required for the signal to rise from 10\% to 90\% of its
+amplitude,  increases with the ST. Table~\ref{tab:risetime} summarizes the risetime
+for the set of ST studied. 
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.48\textwidth]{figs/impulse_vs_lgad_response_1ns_shaping.pdf} \hfill
   \includegraphics[width=0.48\textwidth]{figs/lgad_all_shaping_time_noiseless.pdf}
-  \caption{(Left) Comparison of impulse and LGAD reponses for the a shaping time (ST) of 1~\si{ns}.
-  (Right) LGAD response for the four shaping times studied: \{0.5, 1, 2, 4\}~\si{ns}. All pulses have been nomalized
-  to achive a peak amplitude of 50~\si{mV}. Legends for the shaping times are shown in the plots.}
+  \caption{(Left) Comparison of impulse and characteristic LGAD responses for the a shaping time (ST) of 1~\si{ns}.
+  (Right) LGAD response for the four shaping times studied: \{0.5, 1, 2, 4\}~\si{ns}. All pulses have been normalized
+  to achive a peak amplitude of 50~\si{mV}. }
   \label{fig:ir_and_lgad}
 \end{figure}
 
