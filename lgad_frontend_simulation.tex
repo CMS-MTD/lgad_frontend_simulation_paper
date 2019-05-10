@@ -116,10 +116,10 @@
 
 \begin{abstract}
 %% Text of abstract
-In this paper we report simulation results of a study aiming to optimize some
+In this paper we report simulation results of a study aiming to optimize 
 parameters of a detector that uses low-gain avalanche detectors (LGAD) for
 high-precision timing measurements. The detector is assumed to be composed of a
-50~$\mu$m LGAD sensor connected to a front-end electronics which is used to
+50~$\mu$m LGAD sensor connected to front-end electronics which is used to
 measure the time of arrival of minimum ionizing particles. The simulation
 includes modeling of signal fluctuations in LGAD, variations of the analog
 bandwidth and signal-to-noise ratio (SNR) of the front-end electronics, time
@@ -397,14 +397,11 @@ of the pulse height. Figure~\ref{fig:time_resolution_scan} shows the time resolu
 of the threshold required for a pre-irradiated LGAD sensor with a ST of 1~\si{ns} and a SNR of 30.
 Fig.~\ref{fig:time_res} shows a typical $t_{0}$ distribution, using the LE and CF algorithms, for the pre-irradiated
 LGAD sensor after the ToT correction has been applied. The time resolution ($\sigma_{t}$) is measured to be $37.3 \pm 1.4 $
-and $33.0 \pm 1.4$ for the LE and CF, respectively. Additionally, we study more \textit{realistic} CFD implementations:
-{\color{red}split-and-delay as well as a second order RC filter (Greg, please check naming)} (see Sec.~\ref{sed:cfd_realistic}).
- We observe that \textit{ideal} and split-and delay CFD implementations yield equivalent results within uncertainties.
- The second order RC filter shows a degradation on performance with respect to the split-and-delay implementation.
-
-\subsubsection{constant fraction discriminator implementations}\label{sed:cfd_realistic}
-{\color{red}GREG: PLEASE ADD TEXT HERE, I called the two implementations split-and-delay and second order RC previously in the text (also in red)}.
-
+and $33.0 \pm 1.4$ for the LE and CF, respectively. Additionally, we study a more practical CFD implementation
+based on the subtraction of a scaled signal from a delayed one, where the delay is achieved either using an ideal 
+delay element or an RC-type low pass filter. We observe that the practical CFD implemented using an ideal delay element 
+yields equivalent results as the ideal CFD to within uncertainties. The more realistic CFD implemented using 
+an RC-type low pass filter yields a slightly degraded performance.
 
   \begin{figure}[htbp]
     \centering
@@ -489,23 +486,24 @@ studied for a 2~\si{ns} ST. We observe a 50~\si{ps} degradation for a SNR of 20 
     \multicolumn{1}{c}{}& \multicolumn{6}{c}{Time Resolution (ps)} \\
     \multicolumn{1}{c}{}&\multicolumn{3}{c}{Leading Edge} & \multicolumn{3}{c}{Constant Franction}\\ \hline
     ST (ns) & SNR = 20   & SNR = 30      & SNR = 100     & SNR = 20      & SNR = 30      & SNR = 100 \\
-    0.5 & $38.4 \pm 2.1$  & $34.9 \pm 1.7$  & $28.8 \pm 1.0$  & $37.2 \pm 1.9$  & $34.5 \pm 1.6$  & $29.8 \pm 1.9$ \\
-    1.0 & $45.4 \pm 2.2$  & $37.3 \pm 1.4$  & $28.7 \pm 1.7$  & $36.4 \pm 1.8$  & $33.0 \pm 1.4$  & $25.9 \pm 1.3$ \\
-    2.0 & $63.4 \pm 2.5$  & $47.6 \pm 2.0$  & $30.7 \pm 1.2$  & $47.6 \pm 1.9$  & $34.3 \pm 1.6$  & $28.7 \pm 1.7$ \\
-    4.0 & $103.0 \pm 4.1$  & $75.3 \pm 2.8$  & $37.6 \pm 2.0$  & $73.8 \pm 3.1$  & $54.8 \pm 2.1$  & $32.1 \pm 1.3$ \\
+    0.5 & $38$    & $35$  & $29$  & $37$  & $35$  & $30$ \\
+    1.0 & $45$    & $37$  & $29$  & $36$  & $33$  & $26$ \\
+    2.0 & $63$    & $48$  & $31$  & $48$  & $34$  & $29$ \\
+    4.0 & $103$  & $75$  & $38$  & $74$  & $55$  & $32$ \\
     \end{tabular}
     \caption{50~$\mu$m pre-radiation LGAD sensor simulation: summary of best time resolution obtained for SNRs
     of 20, 30, and 100. Leading edge and constant fraction results are shown.}
  \end{table}
 
 
- \begin{table}\label{tab:pcfd}
+ \begin{table}\label{tab:shaping_time_prerad_psCFD}
    \begin{center}
      \begin{tabular}{c|ccc}
      \multicolumn{1}{c}{}& \multicolumn{3}{c}{Time Resolution (ps)} \\
      \multicolumn{1}{c}{}& \multicolumn{3}{c}{$\mathrm{(RC)}^{2}$ Constant Fraction}\\ \hline
      ST (ns) & SNR = 20      & SNR = 30      & SNR = 100 \\
-     2.0 & $68.0 \pm xx$  & $xx \pm xx$  & $xx \pm xx$ \\
+     1.0 & $58$  & $ 40$  & $28$ \\
+     2.0 & $68$  & $ 49$  & $30$ \\     
      \end{tabular}
      \caption{50~$\mu$m pre-radiation LGAD sensor using a second order RC implementation of a CFD.
      Summary of best time resolution obtained using a ST of 2\si{ns} for SNRs of 20, 30, and 100.}
@@ -517,25 +515,42 @@ studied for a 2~\si{ns} ST. We observe a 50~\si{ps} degradation for a SNR of 20 
      \multicolumn{1}{c}{}& \multicolumn{6}{c}{Time Resolution (ps)} \\
      \multicolumn{1}{c}{}&\multicolumn{3}{c}{Leading Edge} & \multicolumn{3}{c}{Constant Franction}\\ \hline
      ST (ns) & SNR = 20   & SNR = 30      & SNR = 100     & SNR = 20      & SNR = 30      & SNR = 100 \\
-     0.5 & $36.8 \pm 1.9$  & $32.0 \pm 1.3$  & $26.0 \pm 1.2$  & $32.5 \pm 1.4$  & $30.6 \pm 1.2$  & $25.1 \pm 1.2$ \\
-     1.0 & $40.9 \pm 1.4$  & $33.8 \pm 1.1$  & $29.2 \pm 1.0$  & $33.4 \pm 1.5$  & $30.9 \pm 0.9$  & $26.1 \pm 1.3$ \\
-     2.0 & $56.9 \pm 2.4$  & $45.3 \pm 2.2$  & $30.1 \pm 1.1$  & $43.7 \pm 1.6$  & $36.9 \pm 1.3$  & $24.4 \pm 1.0$ \\
-     4.0 & $93.3 \pm 3.6$  & $67.9 \pm 2.5$  & $36.5 \pm 1.3$  & $70.8 \pm 2.8$  & $52.4 \pm 1.9$  & $29.9 \pm 1.9$ \\
+     0.5 & $37$  & $32$  & $26$  & $33$  & $31$  & $25$ \\
+     1.0 & $41$  & $34$  & $29$  & $33$  & $31$  & $26$ \\
+     2.0 & $57$  & $45$  & $30$  & $44$  & $37$  & $24$ \\
+     4.0 & $93$  & $68$  & $37$  & $71$  & $52$  & $30$ \\
      \end{tabular}
      \caption{50~$\mu$m LGAD sensor simulation after neutron fluence of
       $5\times 10^{14}$~n/cm$^2$: summary of best time resolution obtained for SNRs
      of 20, 30, and 100. Leading edge and constant fraction results are shown.}
   \end{table}
 
+ \begin{table}\label{tab:shaping_time_5e14_psCFD}
+     \begin{tabular}{c|ccc|ccc}
+     \multicolumn{1}{c}{}& \multicolumn{3}{c}{Time Resolution (ps)} \\
+     \multicolumn{1}{c}{}& \multicolumn{3}{c}{$\mathrm{(RC)}^{2}$ Constant Fraction}\\ \hline
+     ST (ns) & SNR = 20      & SNR = 30      & SNR = 100 \\
+     1.0 & $55$  & $ 37$  & $30$ \\
+     2.0 & $70$  & $ 53$  & $33$ \\     
+     \end{tabular}
+     \caption{50~$\mu$m LGAD sensor simulation after neutron fluence of
+      $5\times 10^{14}$~n/cm$^2$ using a second order RC implementation of a CFD. 
+      Summary of best time resolution obtained for SNRs
+     of 20, 30, and 100. }
+  \end{table}
+
+
+
+
   \begin{table}\label{tab:shaping_time_1e_15}
       \begin{tabular}{c|ccc|ccc}
       \multicolumn{1}{c}{}& \multicolumn{6}{c}{Time Resolution (ps)} \\
       \multicolumn{1}{c}{}&\multicolumn{3}{c}{Leading Edge} & \multicolumn{3}{c}{Constant Franction}\\ \hline
       ST (ns) & SNR = 20   & SNR = 30      & SNR = 100     & SNR = 20      & SNR = 30      & SNR = 100 \\
-      0.5 & $47.8 \pm 2.0$  & $37.6 \pm 2.0$  & $26.6 \pm 1.3$  & $41.9 \pm 1.9$  & $34.3 \pm 1.1$  & $24.1 \pm 1.0$ \\
-      1.0 & $59.9 \pm 2.3$  & $46.8 \pm 1.8$  & $28.1 \pm 1.5$  & $46.5 \pm 1.9$  & $36.8 \pm 1.3$  & $23.1 \pm 0.9$ \\
-      2.0 & $89.7 \pm 3.5$  & $68.2 \pm 2.6$  & $32.3 \pm 1.4$  & $64.7 \pm 2.8$  & $49.6 \pm 2.1$  & $27.3 \pm 0.9$ \\
-      4.0 & $147.3 \pm 5.1$  & $109.0 \pm 4.3$  & $42.6 \pm 1.9$  & $118.6 \pm 4.0$  & $84.1 \pm 3.2$  & $33.8 \pm 1.1$ \\
+      0.5 & $48$    & $38$    & $27$  & $42$    & $34$  & $24$ \\
+      1.0 & $60$    & $47$    & $28$  & $47$    & $37$  & $23$ \\
+      2.0 & $90$    & $68$    & $32$  & $65$    & $50$  & $27$ \\
+      4.0 & $147$  & $109$  & $43$  & $119$  & $84$  & $34$ \\
       \end{tabular}
       \caption{50~$\mu$m LGAD sensor simulation after neutron fluence of
        $1\times 10^{15}$~n/cm$^2$: summary of best time resolution obtained for SNRs
@@ -543,10 +558,21 @@ studied for a 2~\si{ns} ST. We observe a 50~\si{ps} degradation for a SNR of 20 
    \end{table}
 
 
-
-
-%\subsection{Timing Performace as a function of signal-to-noise ratio}
-%\label{sec:snr}
+ \begin{table}\label{tab:shaping_time_1e15_psCFD}
+     \begin{tabular}{c|ccc|ccc}
+     \multicolumn{1}{c}{}& \multicolumn{3}{c}{Time Resolution (ps)} \\
+     \multicolumn{1}{c}{}& \multicolumn{3}{c}{$\mathrm{(RC)}^{2}$ Constant Fraction}\\ \hline
+     ST (ns) & SNR = 20      & SNR = 30      & SNR = 100 \\
+     1.0 & $45$  & $ 39$  & $29$ \\
+     2.0 & $83$  & $ 53$  & $33$ \\     
+     \end{tabular}
+     \caption{50~$\mu$m LGAD sensor simulation after neutron fluence of
+      $1\times 10^{15}$~n/cm$^2$ using a second order RC implementation of a CFD. 
+      Summary of best time resolution obtained for SNRs
+     of 20, 30, and 100. }
+  \end{table}
+  
+  
 \subsection{Timing performance as a function of irradiation}\label{sec:rad_tolerance}
 We study the effect of irradiation on the time resolution of a 50~$\mu$m LGAD sensor. The impact of irradiation on the unprocessed
 signal pulse shapes are accounted for by the WF2 simulation. We consider three cases: pre-irradiated, and neutron fluences of
@@ -563,6 +589,7 @@ of ~31~\si{ps} and ~37~\si{ps} are obtained for $5\times 10^{14}$~n/cm$^2$ and $
 
 We study the time resolution of a 50~$\mu$m Low-gain avalanche diode (LGAD) sensor using a simulation framework that includes the
 modeling of the raw unprocessed LGAD signal pulse, the front-end electronics, and effects of analog-to-digital converter resolution.
+We used a second order low-pass filter to model the front-end electronics. 
 We focus on the shaping time (ST) and signal-to-noise ratio (SNR) of the front-end electronics and its interplay
 with the irradiation level of the sensor. We reproduce the known LGAD jitter of ~25~\si{ps}
 for fast STs and large SNRs. We observe a clear degradation of the time resolution with SNR and slower STs. The best results are
