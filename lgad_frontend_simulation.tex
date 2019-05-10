@@ -158,8 +158,7 @@ upgrades for HL-LHC in order to overcome event reconstruction challenges posed b
 collisions per beam crossing (pileup). The instrumented regions of pseudorapidity ($\eta$)
 are: $1.6< |\eta| <2.9$, and $2.4< |\eta|<4.2$ for CMS and ATLAS, respectively.
 Beam test measurements have demonstrated that the required time resolution,
-radiation tolerance, and uniformity of LGAD sensors can be achieved~\cite{Apresyan:2018oln}.
-%Si: We need to cite ATLAS testbeam results too right? Do they have it?
+radiation tolerance, and uniformity of LGAD sensors can be achieved~\cite{Apresyan:2018oln,Allaire_2018}.
 
 In this paper we report simulation results of a study aiming to optimize 
 parameters of a detector that uses 50~$\mu$m low-gain avalanche detectors (LGAD) for
@@ -205,7 +204,7 @@ simulation of the FEE. The schematic diagram of the data flow is illustrated
 in Fig.~\ref{fig:simulation_diagram} and described in further detail in
 Sec.~\ref{sub_sec:fee_simulation_and_noise}. The output of the FEE simulation is
 the convolution of the impulse response function and the input signal at the
-FEE. We consider four time constants for the impulse response of the FEE:
+FEE~\cite{Sansen}. We consider four time constants for the impulse response of the FEE:
 0.5, 1.0, 2.0, and 4.0~\si{ns}. At the output of the FEE block, we obtain
 simulated processed LGAD pulses, which include the effects of sensor
 fluctuations, the shaping of the FEE, and noise. The resulting processed pulses
@@ -340,7 +339,7 @@ for the set of ST studied.
 
 
 \subsubsection{Noise injection}\label{sec:noise_simulation}
-Gaussian white noise is simulated by sampling every 10~\si{ps}. Each
+Gaussian white noise is simulated by sampling every 10~\si{ps}~\cite{Radeka}. Each
 sampled time is assigned a random amplitude which is drawn from a gaussian distribution with zero mean and width corresponding to the SNR
 under study. Based on Parseval's theorem, the noise amplitude needs to be adjusted depending
 on the ST of the FEE for a given sampling rate. The left panel of Figure~\ref{fig:noise} shows the gaussian white noise before and after a filter with 
@@ -425,7 +424,7 @@ an RC-type low pass filter yields a slightly degraded performance.
 
 
 \subsection{Time-walk correction and time-over-threshold}\label{sec:tw_and_tot}
-A time-walk correction is applied in order to correct the timestamp drift of pulses with varying amplitudes.
+A time-walk correction is applied in order to correct the timestamp drift of pulses with varying amplitudes~\cite{Spieler}.
 The correction is based on the measured time-over-theshold: $\mathrm{ToT} = t_{1} - t_{0}$. As expected, we observe that the ToT correction
 is large for the LE case and negligible for CF (see Fig.~\ref{fig:time_resolution_scan}).
 Figure~\ref{fig:ToT} (left) shows a typical two dimensional map of $t_{0}$ and ToT for the
