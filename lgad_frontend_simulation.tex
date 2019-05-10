@@ -119,20 +119,19 @@
 In this paper we report simulation results of a study aiming to optimize 
 parameters of a detector that uses low-gain avalanche detectors (LGAD) for
 high-precision timing measurements. The detector is assumed to be composed of a
-50~$\mu$m LGAD sensor connected to front-end electronics which is used to
+50~$\mu$m LGAD sensor coupled to front-end readout electronics which is used to
 measure the time of arrival of minimum ionizing particles. The simulation
-includes modeling of signal fluctuations in LGAD, variations of the analog
+includes modeling of signal fluctuations in the LGAD sensor, variations of the analog
 bandwidth and signal-to-noise ratio (SNR) of the front-end electronics, time
-quantization (time-to-digital converter resolution), and effects of radiation damage on LGAD signals. Two approaches to
+bin quantization, and radiation damage of the LGAD sensors. Two approaches to
 measure the timestamp are considered: leading edge and constant fraction.
-Additionally, the time resolution is studied as function of the level of
-irradiation of the sensor. Simulated LGAD pulses before irradiation, and after
+Simulated LGAD pulses before irradiation, and after irradiation with 
 neutron fluences of $5\times 10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$,
 are studied. The time resolution for a 50~$\mu$m LGADs was found to be ~35~\si{ps}
 for front-end electronics bandwidths larger than 350~\si{MHz} and SNRs larger
-than 30. The time resolution at a SNR of 30 for fluences of $5\times
+than 30. The time resolution at SNR of 30 for fluences of $5\times
 10^{14}$~n/cm$^2$ and $1\times 10^{15}$~n/cm$^2$ were found to be ~31~\si{ps}
-and ~37~\si{ps}, respectively.
+and ~37~\si{ps}, respectively. 
 \end{abstract}
 
 \begin{keyword}
@@ -154,24 +153,24 @@ Silicon \sep Timing \sep LGAD
 %% main text
 \section{Introduction}
 
-Low-gain avalanche diodes (LGAD) are envisioned to be used in the CMS and ATLAS experiment upgrades for HL-LHC in order to overcome
-the event reconstruction challenges posed by the high rate of concurrent
-collisions per beam crossing (pileup). The implemented regions of pseudorapidity ($\eta$)
+Low-gain avalanche diodes (LGAD) are envisioned to be used in the CMS and ATLAS experiment 
+upgrades for HL-LHC in order to overcome event reconstruction challenges posed by the high rate of concurrent
+collisions per beam crossing (pileup). The instrumented regions of pseudorapidity ($\eta$)
 are: $1.6< |\eta| <2.9$, and $2.4< |\eta|<4.2$ for CMS and ATLAS, respectively.
- Beam test measurements have demonstrated that the required time resolution,
+Beam test measurements have demonstrated that the required time resolution,
 radiation tolerance, and uniformity of LGAD sensors can be achieved~\cite{Apresyan:2018oln}.
 %Si: We need to cite ATLAS testbeam results too right? Do they have it?
 
-In this paper we report simulation results of a study aiming to optimize some
+In this paper we report simulation results of a study aiming to optimize 
 parameters of a detector that uses 50~$\mu$m low-gain avalanche detectors (LGAD) for
-high-precision timing measurements. The simulation model includes effects due to variations in LGAD signal pulse shape and amplitude,
-different analog bandwidth and signal-to-noise ratio of the front-end electronics, time
-quantization (time-to-digital converter resolution), and effects of radiation damage on LGAD signals.
-We scan the important parameters for timing resolution: analog bandwidths (BWs),
-signal-to-noise ratios (SNR), and the total fluence that the LGAD sensor has been subjected to.
-Our results indicate that for FEE analog BWs larger than 350~\si{MHz},
+high-precision timing measurements. The simulation model include effects due to variations 
+in LGAD signal pulse shape and amplitude, different analog bandwidth and signal-to-noise ratio (SNR) of the front-end readout 
+electronics (FEE), time bin quantization, and radiation damage on LGAD sensors.
+We scan the important parameters for time resolution: analog bandwidths (BWs),
+signal-to-noise ratios (SNR), and the total neutron equivalent fluence that the 
+LGAD sensor has been subjected to. Our results indicate that for FEE analog BWs larger than 350~\si{MHz},
 corresponding to shaping times less than 1~\si{ns} and SNR larger than 30, time resolutions of 30--37~\si{ps} and 34--47~\si{ps}
-are obtained when using constant fraction (CF) and leading edge (LE) discriminators in their ideal mathematical implementations , respectively.
+are obtained when using constant fraction (CF) and leading edge (LE) discriminators in their ideal mathematical implementations, respectively.
 These results are compatible with previous measurements on LGAD timing resolutions carried out under
 laboratory and beam test conditions~\cite{Apresyan:2018oln, Cartiglia201783, PELLEGRINI201412}.
 We study the time resolution of four different FEE shaping times: $0.5$, $1.0$,
