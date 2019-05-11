@@ -313,7 +313,7 @@ for the set of ST studied.
 \end{figure}
 
 
-\begin{table}\label{tab:risetime}
+\begin{table}
   \begin{center}
     \begin{tabular}{c|cccc}
     ST (ns) & 0.5  & 1.0 & 2.0 & 4.0 \\\hline
@@ -321,6 +321,7 @@ for the set of ST studied.
     \end{tabular}
     \caption{Measured risetime for all shaping times studied: \{0.5, 1, 2, 4\}~\si{ns}. The uncertainty is the r.m.s of the
     risetime distribution and is below 3\%.}
+    \label{tab:risetime}
   \end{center}
  \end{table}
 
@@ -413,8 +414,8 @@ and $33.0 \pm 1.4$ for the LE and CF, respectively.
 \section{LGAD front-end electronics performance}\label{sec:results}
 
 We discuss first studies of the FEE performance as a function of the shaping time and SNR.
-The results for the pre-irradiated LGAD sensor are summarized in Table.~\ref{tab:shaping_time_prerad},
-where the CF results are from the ideal implementation.  Table~\ref{tab:shaping_time_prerad_psCFD} 
+The results for the pre-irradiated LGAD sensor are summarized in Table~\ref{tab:prerad},
+where the CF results are from the ideal implementation.  Table~\ref{tab:prerad_psCFD}
 shows the time resolution results for the practical CF implementation using the RC-type low pass filter,
 where we observe a degradation in performance, which grows as the SNR decreases.
 
@@ -425,7 +426,7 @@ with SNR of 20 yields a difference in performance of 26~\si{ps}, when subtracted
 pre-irradiated sensors we observed that time resolutions of ~35~\si{ps} are achievable for
 STs between 0.5 - 1.0~\si{ns} and a SNR of 30.
 
-\begin{table}\label{tab:shaping_time_prerad}
+\begin{table}
     \begin{tabular}{c|ccc|ccc}
     \multicolumn{1}{c}{}& \multicolumn{6}{c}{Time Resolution (ps)} \\
     \multicolumn{1}{c}{}&\multicolumn{3}{c}{Leading Edge} & \multicolumn{3}{c}{Constant Fraction (Ideal)}\\ \hline
@@ -436,10 +437,13 @@ STs between 0.5 - 1.0~\si{ns} and a SNR of 30.
     4.0 & $103$  & $75$  & $38$  & $74$  & $55$  & $32$ \\
     \end{tabular}
     \caption{50~$\mu$m pre-radiation LGAD sensor simulation: summary of best time resolution obtained for SNRs
-    of 20, 30, and 100. Leading edge and constant fraction results are shown.}
+    of 20, 30, and 100. Leading edge and constant fraction results are shown. The measured time resolutions
+    have statistical uncertainty below 5\%. }
+    \label{tab:prerad}
  \end{table}
 
- \begin{table}\label{tab:shaping_time_prerad_psCFD}
+
+ \begin{table}
    \begin{center}
      \begin{tabular}{c|ccc}
      \multicolumn{1}{c}{}& \multicolumn{3}{c}{Time Resolution (ps)} \\
@@ -449,30 +453,32 @@ STs between 0.5 - 1.0~\si{ns} and a SNR of 30.
      2.0 & $68$  & $ 49$  & $30$ \\     
      \end{tabular}
      \caption{50~$\mu$m pre-radiation LGAD sensor using a second order RC implementation of a CFD.
-     Summary of best time resolution obtained using a ST of 2\si{ns} for SNRs of 20, 30, and 100.}
+     Summary of best time resolution obtained using a ST of 2\si{ns} for SNRs of 20, 30, and 100. The measured time resolutions
+    have statistical uncertainty below 5\%.}
+     \label{tab:prerad_psCFD}
    \end{center}
   \end{table}
 
 
 We study the effect of irradiation on the time resolution of a 50~$\mu$m LGAD sensor. The impact of irradiation on the unprocessed signal pulse shapes are simulated for by the WF2 simulation. The width of the unprocessed
-LGAD signal pulses decrease slightly as the irradiation dosage increases. We consider three 
-cases: pre-irradiated, and neutron fluences of $5\times 10^{14}$~n/cm$^2$ and 
-$1\times 10^{15}$~n/cm$^2$. We perform the same studies as in the pre-irradiated case discussed in
-Sec.~\ref{sec:shaping_time}. The results for the irradiated LGAD sensors are presented in 
+LGAD signal pulses decrease slightly as the irradiation dosage increases. We consider two
+cases with neutron fluences of $5\times 10^{14}$~n/cm$^2$ and 
+$1\times 10^{15}$~n/cm$^2$. We perform the same studies as in the pre-irradiated case. 
+The results for the irradiated LGAD sensors are presented in 
 Tables~\ref{tab:shaping_time_5e14}~and~\ref{tab:shaping_time_5e14_psCFD} for 
 neutron fluences of $5\times 10^{14}$~n/cm$^2$, and in 
-Tables~\ref{tab:shaping_time_1e_15} ~and~\ref{tab:shaping_time_1e15_psCFD} for neutron
+Tables~\ref{tab:shaping_time_1e_15}~and~\ref{tab:shaping_time_1e15_psCFD} for neutron
 fluences of $1\times 10^{15}$~n/cm$^2$.
 We observe similar trends as observed for the pre-irradiated sensor and note that when 
 using STs between 0.5 - 1.0~\si{ns} and a SNR of 30, time resolutions of the order
-of ~31~\si{ps} and ~37~\si{ps} are obtained for $5\times 10^{14}$~n/cm$^2$ and 
+of 31~\si{ps}~and~37~\si{ps} are obtained for $5\times 10^{14}$~n/cm$^2$ and 
 $1\times 10^{15}$~n/cm$^2$, respectively.
 
 
 
 
 
- \begin{table}\label{tab:shaping_time_5e14}
+ \begin{table}
      \begin{tabular}{c|ccc|ccc}
      \multicolumn{1}{c}{}& \multicolumn{6}{c}{Time Resolution (ps)} \\
      \multicolumn{1}{c}{}&\multicolumn{3}{c}{Leading Edge} & \multicolumn{3}{c}{Constant Franction}\\ \hline
@@ -484,10 +490,12 @@ $1\times 10^{15}$~n/cm$^2$, respectively.
      \end{tabular}
      \caption{50~$\mu$m LGAD sensor simulation after neutron fluence of
       $5\times 10^{14}$~n/cm$^2$: summary of best time resolution obtained for SNRs
-     of 20, 30, and 100. Leading edge and constant fraction results are shown.}
+     of 20, 30, and 100. Leading edge and constant fraction results are shown. The measured time resolutions
+    have statistical uncertainty below 5\%.}
+\label{tab:shaping_time_5e14}
   \end{table}
 
- \begin{table}\label{tab:shaping_time_5e14_psCFD}
+ \begin{table}
     \begin{center}
      \begin{tabular}{c|ccc|ccc}
      \multicolumn{1}{c}{}& \multicolumn{3}{c}{Time Resolution (ps)} \\
@@ -500,13 +508,15 @@ $1\times 10^{15}$~n/cm$^2$, respectively.
      \caption{50~$\mu$m LGAD sensor simulation after neutron fluence of
       $5\times 10^{14}$~n/cm$^2$ using a second order RC implementation of a CFD. 
       Summary of best time resolution obtained for SNRs
-     of 20, 30, and 100. }
+     of 20, 30, and 100. The measured time resolutions
+    have statistical uncertainty below 5\%.}
+\label{tab:shaping_time_5e14_psCFD}
   \end{table}
 
 
 
 
-  \begin{table}\label{tab:shaping_time_1e_15}
+  \begin{table}
       \begin{tabular}{c|ccc|ccc}
       \multicolumn{1}{c}{}& \multicolumn{6}{c}{Time Resolution (ps)} \\
       \multicolumn{1}{c}{}&\multicolumn{3}{c}{Leading Edge} & \multicolumn{3}{c}{Constant Franction}\\ \hline
@@ -517,12 +527,14 @@ $1\times 10^{15}$~n/cm$^2$, respectively.
       4.0 & $147$  & $109$  & $43$  & $119$  & $84$  & $34$ \\
       \end{tabular}
       \caption{50~$\mu$m LGAD sensor simulation after neutron fluence of
-       $1\times 10^{15}$~n/cm$^2$: summary of best time resolution obtained for SNRs
-      of 20, 30, and 100. Leading edge and constant fraction results are shown.}
+       $1\times 10^{15}$~n/cm$^2$: Summary of best time resolution obtained for SNRs
+      of 20, 30, and 100. Leading edge and constant fraction results are shown. The measured time resolutions
+    have statistical uncertainty below 5\%.}
+\label{tab:shaping_time_1e_15}
    \end{table}
 
 
- \begin{table}\label{tab:shaping_time_1e15_psCFD}
+ \begin{table}
     \begin{center}
      \begin{tabular}{c|ccc|ccc}
      \multicolumn{1}{c}{}& \multicolumn{3}{c}{Time Resolution (ps)} \\
@@ -535,7 +547,9 @@ $1\times 10^{15}$~n/cm$^2$, respectively.
      \caption{50~$\mu$m LGAD sensor simulation after neutron fluence of
       $1\times 10^{15}$~n/cm$^2$ using a second order RC implementation of a CFD. 
       Summary of best time resolution obtained for SNRs
-     of 20, 30, and 100. }
+     of 20, 30, and 100. The measured time resolutions
+    have statistical uncertainty below 5\%. }
+\label{tab:shaping_time_1e15_psCFD}
   \end{table}
   
   
