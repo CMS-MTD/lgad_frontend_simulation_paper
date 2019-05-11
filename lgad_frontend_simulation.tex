@@ -105,9 +105,9 @@
 \author[2]{S.~Xie}
 \author[1]{A.~Apresyan}
 \author[2]{L.~Narv\'aez}
-\author[1]{T.~Liu}
+\author[1]{L.~Ristori}
 \author[3]{N.~Cartiglia}
-
+\author[1]{T.~Liu}
 
 \address[1]{Fermi National Accelerator Laboratory, Batavia, IL, USA}
 \address[2]{California Institute of Technology, Pasadena, CA, USA}
@@ -215,7 +215,7 @@ for each simulated dataset and scanned over the relevant range.
 
  \begin{figure}[htbp]
    \centering
-   \includegraphics[width=0.48\textwidth]{figs/lgad_current_pre_rad_all_pulses_v2.pdf} \hfill
+   \includegraphics[width=0.48\textwidth]{figs/lgad_current_pre_rad_all_pulses_v3.pdf} \hfill
    \includegraphics[width=0.48\textwidth]{figs/LGAD_current_all_irradiations_v2.pdf}
    \caption{(Left) One thousand simulated LGAD signal waveforms from WF2 for a pre-radiated sensor.
    (Right) Characteristic example LGAD signal waveforms for different irradiation levels.}
@@ -225,7 +225,7 @@ for each simulated dataset and scanned over the relevant range.
 
 A waveform analysis is performed with the pulses obtained at the output of the
 FEE block. We assign timestamps to each pulse by using algorithms that emulate
-ideal LE and CF discriminators. For each threshold we obtain an LE and CF
+ideal LE and CF discriminators~\cite{Spieler}. For each threshold we obtain an LE and CF
 timestamp as well as the corresponding time-over-theshold (ToT) of the pulse.
 The ToT is defined as the time it takes between the first time the pulse crosses
 the threshold and the second time the pulse crosses the threshold in the opposite direction. 
@@ -265,7 +265,7 @@ simulation is shown in Fig.~\ref{fig:simulation_diagram}.
 analytical and numerical calculations. We implement two independent
 paths of simulations, one based on the time domain and the other on the Laplace domain.
 Both simulation use the unprocessed WF2 LGAD pulses as input (see Fig~\ref{fig:lgad_current}).
- The results of the two simulations are in agreement within statistical uncertainties and provide a
+The results of the two simulations are in agreement within statistical uncertainties and provide a
 cross check of the results. Sections~\ref{sec:fee}
 and~\ref{sec:noise_simulation} describe the details of the implementation of the
 front-end and noise simulation. 
@@ -274,7 +274,7 @@ front-end and noise simulation.
 The simulation of the front-end readout electronics is based on a single amplification stage. 
 The FEE is a second order low-pass filter with transfer function ($H(S)$)
 and impulse response ($h(t)$) given by equations~\ref{eq:filter_tf} and~\ref{eq:filter_ir}, respectively.
-It realizes a $\mathrm{CR-RC}^{3}$-type filter~\cite{}.
+It realizes a $\mathrm{CR-RC}^{3}$-type filter~\cite{Sansen}.
  
  \begin{equation}\label{eq:filter_tf}
    H(S) = \frac{\frac{1}{\tau_{s}^{2}}}{(S+1/\tau_{s})^{2}}
@@ -488,6 +488,7 @@ $1\times 10^{15}$~n/cm$^2$, respectively.
   \end{table}
 
  \begin{table}\label{tab:shaping_time_5e14_psCFD}
+    \begin{center}
      \begin{tabular}{c|ccc|ccc}
      \multicolumn{1}{c}{}& \multicolumn{3}{c}{Time Resolution (ps)} \\
      \multicolumn{1}{c}{}& \multicolumn{3}{c}{$\mathrm{(RC)}^{2}$ Constant Fraction}\\ \hline
@@ -495,6 +496,7 @@ $1\times 10^{15}$~n/cm$^2$, respectively.
      1.0 & $55$  & $ 37$  & $30$ \\
      2.0 & $70$  & $ 53$  & $33$ \\     
      \end{tabular}
+     \end{center}
      \caption{50~$\mu$m LGAD sensor simulation after neutron fluence of
       $5\times 10^{14}$~n/cm$^2$ using a second order RC implementation of a CFD. 
       Summary of best time resolution obtained for SNRs
@@ -521,6 +523,7 @@ $1\times 10^{15}$~n/cm$^2$, respectively.
 
 
  \begin{table}\label{tab:shaping_time_1e15_psCFD}
+    \begin{center}
      \begin{tabular}{c|ccc|ccc}
      \multicolumn{1}{c}{}& \multicolumn{3}{c}{Time Resolution (ps)} \\
      \multicolumn{1}{c}{}& \multicolumn{3}{c}{$\mathrm{(RC)}^{2}$ Constant Fraction}\\ \hline
@@ -528,6 +531,7 @@ $1\times 10^{15}$~n/cm$^2$, respectively.
      1.0 & $45$  & $ 39$  & $29$ \\
      2.0 & $83$  & $ 53$  & $33$ \\     
      \end{tabular}
+     \end{center}
      \caption{50~$\mu$m LGAD sensor simulation after neutron fluence of
       $1\times 10^{15}$~n/cm$^2$ using a second order RC implementation of a CFD. 
       Summary of best time resolution obtained for SNRs
@@ -560,15 +564,6 @@ to neutron fluences of $1\times 10^{15}$~n/cm$^2$.
 
 
 \section*{Acknowledgment}
-
-%We thank the FTBF personnel and Fermilab accelerator's team for very good beam
-%conditions during our test beam time. We also appreciate the technical support
-%of the Fermilab SiDet department for the rapid production of wire-bonded and
-%packaged LGAD assemblies. We would like to thank Alan Prosser and Ryan Rivera
-%or their critical help in setting up the DAQ and trigger chain. We thank Ned
-%Spencer, Max Wilder, and Forest McKinney-Martinez for their technical
-%assistance, and the CNM and HPK manufacturing team. We acknowledge the help of
-%V. Cindro and I. Mandic with the neutron irradiations.
 
 A. Apresyan gratefully acknowledges support from the DOE Early Career Research Program.
 This document was prepared using the resources of the Fermi National Accelerator
